@@ -11,7 +11,6 @@ const apiCall = () => {
 const Portfolios = (props) => {
   return (
     <>
-      {props.testingData}
       <section className="section-title">
         <div className="px-2">
           <div className="pt-5 pb-4">
