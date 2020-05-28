@@ -6,8 +6,8 @@ const Login = () => {
       <div className="container">
         <section className="section-title">
           <div className="px-2">
-            <div className="pt-5 pb-4">
-              <h1>🖖 You're weclome to Login</h1>
+            <div className="pt-5 pb-4 text-center">
+              <h1>🖖 You're welcome to Login</h1>
             </div>
           </div>
         </section>
