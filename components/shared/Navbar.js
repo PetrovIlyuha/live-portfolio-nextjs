@@ -1,12 +1,7 @@
 import React from "react";
 import { Navbar, Nav } from "react-bootstrap";
-import Link from "next/link";
-
-const AppLink = ({ children, className, href }) => (
-  <Link href={href}>
-    <a className={className}>{children}</a>
-  </Link>
-);
+import styles from "./Navbar.module.css";
+import AppLink from "../utils/AppLink";
 
 const AppNavbar = () => {
   return (
@@ -17,21 +12,15 @@ const AppNavbar = () => {
             <img
               src="/logo.png"
               alt="Personal Brand Logo"
-              style={{
-                width: "120px",
-                borderRadius: "10px",
-                marginRight: "10px",
-                marginTop: 10,
-                boxShadow: "1px 0px 24px 10px rgba(119, 160, 118, 0.15)",
-              }}
+              className={styles.logo__img}
             />
           </AppLink>
         </Navbar.Brand>
         <Navbar.Toggle />
         <Navbar.Collapse>
           <Nav className="mr-auto">
-            <AppLink href="/portfolios" className="text-center nav-link">
-              Portfolios
+            <AppLink href="/projects" className="text-center nav-link">
+              Projects
             </AppLink>
             <AppLink href="/forum/categories" className="text-center nav-link">
               Forum
