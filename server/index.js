@@ -1,5 +1,6 @@
 const express = require("express");
 const next = require("next");
+global.fetch = require("node-fetch");
 const { ApolloServer, gql } = require("apollo-server-express");
 const port = parseInt(process.env.PORT, 10) || 3000;
 const dev = process.env.NODE_ENV !== "production";
