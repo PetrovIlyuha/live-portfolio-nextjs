@@ -1,36 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useLazyQuery } from "@apollo/react-hooks";
 import axios from "axios";
+import { GET_PROJECTS } from "../../apollo/queries";
+import { Spinner } from "react-bootstrap";
 import Link from "next/link";
 import ProjectCard from "../../components/projects/ProjectCard";
-
-const fetchProjects = () => {
-  const query = `
-    query Projects {
-      projects {
-        _id
-        title
-        content
-        stack
-        daysInMaking
-        isInProgress
-        demoGif
-        link
-      }
-  }`;
-  return axios
-    .post("http://localhost:3000/graphql", {
-      query,
-    })
-    .then(
-      ({
-        data: {
-          data: { projects },
-        },
-      }) => {
-        return projects;
-      }
-    );
-};
 
 const createProjectMutation = () => {
   const query = `
@@ -135,8 +109,17 @@ const updateProjectMutation = (id) => {
     );
 };
 
-const Projects = ({ data }) => {
-  const [projects, setProjects] = useState(data.projects);
+const Projects = () => {
+  const [projects, setProjects] = useState([]);
+  const [getProjects, { loading, data }] = useLazyQuery(GET_PROJECTS);
+
+  useEffect(() => {
+    getProjects();
+  }, []);
+
+  if (data && data.projects.length > 0 && projects.length === 0)
+    setProjects(data.projects);
+  if (loading) return <Spinner animation="grow" variant="danger" size="lg" />;
   const createProject = async () => {
     const newProject = await createProjectMutation();
     const newProjects = [...projects, newProject];
@@ -153,14 +136,14 @@ const Projects = ({ data }) => {
 
   const deleteProject = async (id) => {
     const deletedId = await deleteProjectMutation(id);
-    const index = projects.findIndex((p) => p._id === deletedId);
     const newProjects = [...projects];
     newProjects.splice(deletedId, 1);
     setProjects(newProjects);
   };
+
   return (
     <>
-      <section className="section-title">
+      <section className="section-title projects_page">
         <div className="px-2">
           <div className="pt-5 pb-4">
             <h1>Projects</h1>
@@ -197,11 +180,6 @@ const Projects = ({ data }) => {
       </section>
     </>
   );
-};
-
-Projects.getInitialProps = async () => {
-  const projects = await fetchProjects();
-  return { data: { projects } };
 };
 
 export default Projects;

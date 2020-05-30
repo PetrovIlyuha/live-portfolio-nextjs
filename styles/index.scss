@@ -1,3 +1,6 @@
+@import url("https://fonts.googleapis.com/css2?family=Anton&family=Cabin:ital,wght@0,400;0,500;1,500;1,600&display=swap");
+// font-family: 'Anton', sans-serif;
+// font-family: 'Cabin', sans-serif;
 $main-color-blue: #316aff;
 $main-color-red: "red";
 
@@ -32,7 +35,7 @@ $cyan: #17a2b8 !default;
 body {
   -webkit-font-smoothing: antialiased;
   background-color: $white;
-  font-family: sans-serif;
+  font-family: "Anton", sans-serif;
   margin: 0;
   padding: 0;
   min-height: 100%;
@@ -818,4 +821,9 @@ html {
       border-bottom: 0;
     }
   }
+}
+
+// Projects Page Styles
+.projects_page {
+  font-family: "Cabin", sans-serif;
 }

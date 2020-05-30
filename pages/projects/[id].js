@@ -1,42 +1,21 @@
-import React from "react";
-import axios from "axios";
+import React, { useState, useEffect } from "react";
+import { useLazyQuery } from "@apollo/react-hooks";
+import { GET_PROJECT_BY_ID } from "../../apollo/queries";
+import { Spinner } from "react-bootstrap";
 
-const fetchProjectById = (id) => {
-  const query = `
-    query Project($id: ID) {
-      project(id: $id) {
-        _id
-        title
-        content
-        stack
-        daysInMaking
-        isInProgress
-        startDate
-        endDate
-        demoGif
-        link
-      }
-    }
-  `;
-  const variables = { id: id };
-  return axios
-    .post("http://localhost:3000/graphql", {
-      query: query,
-      variables: variables,
-    })
-    .then(
-      ({
-        data: {
-          data: { project },
-        },
-      }) => {
-        // console.log(project);
-        return project;
-      }
-    );
-};
+const ProjectsDetail = ({ query }) => {
+  const [project, setProject] = useState(null);
+  const [getProject, { loading, data }] = useLazyQuery(GET_PROJECT_BY_ID);
 
-const ProjectsDetail = ({ project }) => {
+  useEffect(() => {
+    getProject({
+      variables: { id: query.id },
+    });
+  }, []);
+
+  if (data && data.project && !project) setProject(data.project);
+  if (loading || !project)
+    return <Spinner animation="grow" variant="danger" size="lg" />;
   return (
     <div className="portfolio-detail">
       <div className="container">
@@ -87,8 +66,7 @@ const ProjectsDetail = ({ project }) => {
 };
 
 ProjectsDetail.getInitialProps = async ({ query }) => {
-  const project = await fetchProjectById(query.id);
-  return { project };
+  return { query };
 };
 
 export default ProjectsDetail;
