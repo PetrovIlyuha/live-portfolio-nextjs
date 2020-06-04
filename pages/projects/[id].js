@@ -1,21 +1,17 @@
 import React, { useState, useEffect } from "react";
-import { useLazyQuery } from "@apollo/react-hooks";
+import { useQuery } from "@apollo/react-hooks";
 import { GET_PROJECT_BY_ID } from "../../apollo/queries";
+import withApollo from "@/hoc/withApollo";
+import { getDataFromTree } from "@apollo/react-ssr";
 import { Spinner } from "react-bootstrap";
 
 const ProjectsDetail = ({ query }) => {
-  const [project, setProject] = useState(null);
-  const [getProject, { loading, data }] = useLazyQuery(GET_PROJECT_BY_ID);
+  const { data, loading, error } = useQuery(GET_PROJECT_BY_ID, {
+    variables: { id: query.id },
+  });
+  const project = (data && data.project) || {};
 
-  useEffect(() => {
-    getProject({
-      variables: { id: query.id },
-    });
-  }, []);
-
-  if (data && data.project && !project) setProject(data.project);
-  if (loading || !project)
-    return <Spinner animation="grow" variant="danger" size="lg" />;
+  if (loading) return <Spinner animation="grow" variant="danger" size="lg" />;
   return (
     <div className="portfolio-detail">
       <div className="container">
@@ -69,4 +65,4 @@ ProjectsDetail.getInitialProps = async ({ query }) => {
   return { query };
 };
 
-export default ProjectsDetail;
+export default withApollo(ProjectsDetail, { getDataFromTree });
