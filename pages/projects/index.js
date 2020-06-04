@@ -1,52 +1,12 @@
-import React, { useState, useEffect } from "react";
-import { useLazyQuery } from "@apollo/react-hooks";
+import React from "react";
+import { useQuery, useMutation } from "@apollo/react-hooks";
 import axios from "axios";
-import { GET_PROJECTS } from "../../apollo/queries";
+import { GET_PROJECTS, CREATE_PROJECT } from "../../apollo/queries";
 import { Spinner } from "react-bootstrap";
+import withApollo from "@/hoc/withApollo";
+import { getDataFromTree } from "@apollo/react-ssr";
 import Link from "next/link";
 import ProjectCard from "../../components/projects/ProjectCard";
-
-const createProjectMutation = () => {
-  const query = `
-    mutation CreateProject {
-      createProject(input: {
-        title: "Instagram Clone with React",
-        content:
-          "Material UI and React with GraphQL based API clone of an Instagram App",
-        stack: "GraphQL, ReactJS, MaterialUI",
-        link: "https://instaclone-theta.now.sh/",
-        demoGif: "/insta_demo.gif",
-        daysInMaking: 34,
-        startDate: "03/02/2020",
-        endDate: "28/02/2020",
-        isInProgress: true,
-    }) {
-      _id
-      title
-      content
-      stack
-      link
-      demoGif
-      daysInMaking
-      startDate
-      endDate
-      isInProgress
-    }
-  }`;
-  return axios
-    .post("http://localhost:3000/graphql", {
-      query,
-    })
-    .then(
-      ({
-        data: {
-          data: { createProject },
-        },
-      }) => {
-        return createProject;
-      }
-    );
-};
 
 const deleteProjectMutation = (id) => {
   const query = `
@@ -67,6 +27,7 @@ const deleteProjectMutation = (id) => {
       }
     );
 };
+
 const updateProjectMutation = (id) => {
   const query = `
     mutation UpdateProject {
@@ -110,37 +71,28 @@ const updateProjectMutation = (id) => {
 };
 
 const Projects = () => {
-  const [projects, setProjects] = useState([]);
-  const [getProjects, { loading, data }] = useLazyQuery(GET_PROJECTS);
+  const { data, loading, error } = useQuery(GET_PROJECTS);
+  const [createProject] = useMutation(CREATE_PROJECT, {
+    update(cache, { data: { createProject } }) {
+      const { projects } = cache.readQuery({ query: GET_PROJECTS });
+      cache.writeQuery({
+        query: GET_PROJECTS,
+        data: { projects: [...projects, createProject] },
+      });
+    },
+  });
 
-  useEffect(() => {
-    getProjects();
-  }, []);
-
-  if (data && data.projects.length > 0 && projects.length === 0)
-    setProjects(data.projects);
   if (loading) return <Spinner animation="grow" variant="danger" size="lg" />;
-  const createProject = async () => {
-    const newProject = await createProjectMutation();
-    const newProjects = [...projects, newProject];
-    setProjects(newProjects);
-  };
 
   const updateProject = async (id) => {
-    const updatedProject = await updateProjectMutation(id);
-    const index = projects.findIndex((p) => p._id === id);
-    const newProjects = [...projects];
-    newProjects[index] = updatedProject;
-    setProjects(newProjects);
+    await updateProjectMutation(id);
   };
 
   const deleteProject = async (id) => {
-    const deletedId = await deleteProjectMutation(id);
-    const newProjects = [...projects];
-    newProjects.splice(deletedId, 1);
-    setProjects(newProjects);
+    await deleteProjectMutation(id);
   };
 
+  const projects = (data && data.projects) || [];
   return (
     <>
       <section className="section-title projects_page">
@@ -182,4 +134,4 @@ const Projects = () => {
   );
 };
 
-export default Projects;
+export default withApollo(Projects, { getDataFromTree });
