@@ -1,5 +1,7 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
+/server/config/dev.js
+
 # dependencies
 /node_modules
 /.pnp
@@ -17,7 +19,7 @@
 
 # misc
 .DS_Store
-
+.env*
 # debug
 npm-debug.log*
 yarn-debug.log*
