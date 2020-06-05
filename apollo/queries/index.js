@@ -42,8 +42,8 @@ export const CREATE_PROJECT = gql`
         link: "https://instaclone-theta.now.sh/"
         demoGif: "/insta_demo.gif"
         daysInMaking: 34
-        startDate: "03/02/2020"
-        endDate: "28/02/2020"
+        startDate: "2020-03-10T23:59Z"
+        endDate: "2020-04-10T23:59Z"
         isInProgress: true
       }
     ) {
@@ -58,5 +58,41 @@ export const CREATE_PROJECT = gql`
       endDate
       isInProgress
     }
+  }
+`;
+
+export const UPDATE_PORTFOLIO = gql`
+  mutation UpdateProject($id: ID) {
+    updateProject(
+      id: $id
+      input: {
+        title: "Instagram Clone with React"
+        content: "Material UI and React with GraphQL based API clone of an Instagram App"
+        stack: "GraphQL, ReactJS, MaterialUI"
+        link: "https://instaclone-theta.now.sh/"
+        demoGif: "/insta_demo.gif"
+        daysInMaking: 34
+        startDate: "2020-04-03T23:59Z"
+        endDate: "2020-06-05T23:59Z"
+        isInProgress: true
+      }
+    ) {
+      _id
+      title
+      content
+      stack
+      link
+      demoGif
+      daysInMaking
+      startDate
+      endDate
+      isInProgress
+    }
+  }
+`;
+
+export const DELETE_PROJECT = gql`
+  mutation DeleteProject($id: ID) {
+    deleteProject(id: $id)
   }
 `;
