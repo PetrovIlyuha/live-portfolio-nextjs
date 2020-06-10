@@ -11,6 +11,7 @@ const projectSchema = new Schema({
   startDate: { type: Date, required: true },
   endDate: { type: Date, required: true },
   isInProgress: { type: Boolean },
+  user: { type: Schema.Types.ObjectId, ref: "User" },
   createdAt: { type: Date, default: Date.now },
 });
 
