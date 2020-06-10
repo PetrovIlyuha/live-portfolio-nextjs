@@ -7,10 +7,12 @@ const app = next({ dev });
 const handle = app.getRequestHandler();
 
 // mongo db connection
-require("./database").connect();
+const db = require("./database");
+db.connect();
 
 app.prepare().then(() => {
   const server = express();
+  require("./middlewares").init(server, db);
   const apolloServer = require("./graphql/index").createApolloServer();
   apolloServer.applyMiddleware({ app: server });
 
