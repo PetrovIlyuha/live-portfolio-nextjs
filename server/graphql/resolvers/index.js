@@ -1,5 +1,3 @@
-const User = require("../../database/models/user");
-
 exports.projectQueries = {
   project: (root, { id }, ctx) => {
     return ctx.models.Project.getById(id);
@@ -25,13 +23,14 @@ exports.projectMutations = {
 };
 
 exports.userMutations = {
-  signIn: (root, args, ctx) => {
-    return ctx.models.User.signIn();
+  signUp: async (root, { input }, ctx) => {
+    const registeredUser = await ctx.models.User.signUp(input);
+    return registeredUser._id;
   },
-  signUp: (root, args, ctx) => {
-    return ctx.models.User.signUp();
+  signIn: async (root, { input }, ctx) => {
+    return await ctx.models.User.signIn(input, ctx);
   },
   signOut: (root, args, ctx) => {
-    return ctx.models.User.signOut();
+    return ctx.models.User.signOut(ctx);
   },
 };
