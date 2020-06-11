@@ -7,6 +7,7 @@ mongoose.connect(
   {
     useUnifiedTopology: true,
     useNewUrlParser: true,
+    useCreateIndex: true,
   },
   async () => {
     console.log("Populating DB with temporary data STARTED ✅");

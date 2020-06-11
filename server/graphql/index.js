@@ -6,13 +6,16 @@ const {
   projectMutations,
   userMutations,
 } = require("./resolvers");
-const { projectTypes } = require("./types");
+const { projectTypes, userTypes } = require("./types");
+const { buildAuthContext } = require("./context");
+
 const Project = require("./models/Project");
 const User = require("./models/User");
 
 exports.createApolloServer = () => {
   const typeDefs = gql`
     ${projectTypes}
+    ${userTypes}
 
     type Query {
       project(id: ID): Project
@@ -24,9 +27,9 @@ exports.createApolloServer = () => {
       updateProject(id: ID, input: ProjectInput): Project
       deleteProject(id: ID): ID
 
-      signIn: String
-      signUp: String
-      signOut: String
+      signUp(input: SignUpInput): String
+      signIn(input: SignInInput): User
+      signOut: Boolean
     }
   `;
 
@@ -38,10 +41,11 @@ exports.createApolloServer = () => {
   const apolloServer = new ApolloServer({
     typeDefs,
     resolvers,
-    context: () => ({
+    context: ({ req }) => ({
+      ...buildAuthContext(req),
       models: {
         Project: new Project(mongoose.model("Project")),
-        User: new User(),
+        User: new User(mongoose.model("User")),
       },
     }),
   });
