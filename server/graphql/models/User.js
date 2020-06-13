@@ -1,17 +1,28 @@
 class User {
-  // constructor(model) {
-  //   this.Model = model;
-  // }
-  signIn() {
-    return "Signing in";
+  constructor(model) {
+    this.Model = model;
   }
-
-  signUp() {
-    return "Signing Up";
+  signUp(signUpData) {
+    if (signUpData.password !== signUpData.passwordConfirmation) {
+      throw new Error("Passwords don't match");
+    }
+    return this.Model.create(signUpData);
   }
-
-  signOut() {
-    return "Signing Out";
+  async signIn(signInData, ctx) {
+    try {
+      const user = await ctx.authenticate(signInData);
+      return user;
+    } catch (error) {
+      return error;
+    }
+  }
+  signOut(ctx) {
+    try {
+      ctx.logout();
+      return true;
+    } catch (err) {
+      return false;
+    }
   }
 }
 
