@@ -827,3 +827,42 @@ html {
 .projects_page {
   font-family: "Cabin", sans-serif;
 }
+
+// * User's Navbar Section Personal Info and Greeting
+.avatar_rounded {
+  border-radius: 50%;
+  height: 40px;
+  border: 1px solid yellow;
+  transition: 1s ease-in;
+}
+
+.avatar_rounded:hover {
+  transform: scale(1.1);
+}
+
+.user_personal_navbar {
+  display: flex;
+  flex-direction: row;
+  width: 400px;
+  justify-content: space-around;
+  align-items: center;
+  margin: 0 auto;
+}
+
+.user_greeting {
+  display: flex;
+  flex-direction: row;
+  width: 220px;
+  justify-content: space-around;
+  align-items: center;
+  align-content: center;
+  cursor: pointer;
+}
+
+// Transitions & animations in Navbar
+.scale_up {
+  transition: 0.3s ease-in;
+}
+.scale_up:hover {
+  transform: scale(1.1);
+}

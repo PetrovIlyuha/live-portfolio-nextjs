@@ -2,20 +2,31 @@ class User {
   constructor(model) {
     this.Model = model;
   }
-  signUp(signUpData) {
+
+  getAuthUser(ctx) {
+    if (ctx.isAuthenticated()) {
+      return ctx.getUser();
+    }
+    return null;
+  }
+
+  async signUp(signUpData) {
+    console.log(signUpData);
     if (signUpData.password !== signUpData.passwordConfirmation) {
       throw new Error("Passwords don't match");
+    } else if (!signUpData.username.trim()) {
+      throw new Error("You may want to enjoy using Username");
+    } else if (!signUpData.email.trim()) {
+      throw new Error("Don't forget to provide your e-mail");
     }
-    return this.Model.create(signUpData);
+    return await this.Model.create(signUpData);
   }
+
   async signIn(signInData, ctx) {
-    try {
-      const user = await ctx.authenticate(signInData);
-      return user;
-    } catch (error) {
-      return error;
-    }
+    const user = await ctx.authenticate(signInData);
+    return user;
   }
+
   signOut(ctx) {
     try {
       ctx.logout();
