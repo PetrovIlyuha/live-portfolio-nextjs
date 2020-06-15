@@ -3,9 +3,12 @@ import {
   UPDATE_PORTFOLIO,
   CREATE_PROJECT,
   DELETE_PROJECT,
+  SIGN_IN,
+  GET_USER,
+  SIGN_OUT,
 } from "../queries";
 
-import { useQuery, useMutation } from "@apollo/react-hooks";
+import { useQuery, useMutation, useLazyQuery } from "@apollo/react-hooks";
 
 export const useGetProjects = () => useQuery(GET_PROJECTS);
 
@@ -33,3 +36,18 @@ export const useDeleteProject = () =>
       });
     },
   });
+
+// Auth actions start ------***-------
+export const useSignIn = () =>
+  useMutation(SIGN_IN, {
+    update(cache, { data: { signIn: signedInUser } }) {
+      cache.writeQuery({
+        query: GET_USER,
+        data: { user: signedInUser },
+      });
+    },
+  });
+export const useSignOut = () => useMutation(SIGN_OUT);
+export const useLazyGetUser = () => useLazyQuery(GET_USER);
+export const useGetUser = () => useQuery(GET_USER);
+// Auth actions end ------***-------
