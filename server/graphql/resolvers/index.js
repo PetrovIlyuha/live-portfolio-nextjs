@@ -22,6 +22,14 @@ exports.projectMutations = {
   },
 };
 
+// User queries
+exports.userQueries = {
+  user: (root, args, ctx) => {
+    return ctx.models.User.getAuthUser(ctx);
+  },
+};
+
+// User Mutations
 exports.userMutations = {
   signUp: async (root, { input }, ctx) => {
     const registeredUser = await ctx.models.User.signUp(input);
