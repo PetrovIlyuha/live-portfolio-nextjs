@@ -1,9 +1,27 @@
-import React from "react";
+import { useState, useEffect } from "react";
 import { Navbar, Nav } from "react-bootstrap";
 import styles from "./Navbar.module.css";
 import AppLink from "../utils/AppLink";
+import withApollo from "@/hoc/withApollo";
+import { useLazyGetUser } from "../../apollo/actions";
 
 const AppNavbar = () => {
+  const [user, setUser] = useState(null);
+  const [hasResponse, setHasResponse] = useState(false);
+  const [getUser, { data, error }] = useLazyGetUser();
+
+  useEffect(() => {
+    getUser();
+  }, []);
+  if (data) {
+    if (data.user && !user) {
+      setUser(data.user);
+    }
+    if (!data.user && user) {
+      setUser(null);
+    }
+    if (!hasResponse) setHasResponse(true);
+  }
   return (
     <div className="navbar-wrapper">
       <Navbar expand="lg" className="navbar-dark fj-mw9">
@@ -19,31 +37,60 @@ const AppNavbar = () => {
         <Navbar.Toggle />
         <Navbar.Collapse>
           <Nav className="mr-auto">
-            <AppLink href="/projects" className="text-center nav-link">
+            <AppLink href="/projects" className="text-center nav-link scale_up">
               Projects
             </AppLink>
-            <AppLink href="/forum/categories" className="text-center nav-link">
+            <AppLink
+              href="/forum/categories"
+              className="text-center nav-link scale_up"
+            >
               Forum
             </AppLink>
-            <AppLink href="#" className="text-center nav-link">
+            <AppLink href="#" className="text-center nav-link scale_up">
               CV
             </AppLink>
           </Nav>
-          <Nav>
-            <AppLink href="/login" className="text-center nav-link">
-              Login
-            </AppLink>
-            <AppLink
-              href="/register"
-              className="text-center btn btn-success bg-dark mx-auto pl-3 pr-3"
-            >
-              Register
-            </AppLink>
-          </Nav>
+          {hasResponse && (
+            <Nav>
+              {user ? (
+                <div className="user_personal_navbar">
+                  <div className="user_greeting">
+                    <span className="nav-link mr-4">
+                      Weclome{" "}
+                      <span style={{ color: "yellow" }}>{user.username}</span>
+                    </span>
+                    <img
+                      src={user.avatar}
+                      alt="User's Profile Photo Avatar"
+                      className="avatar_rounded"
+                    />
+                  </div>
+                  <AppLink
+                    href="/logout"
+                    className="text-center nav-link btn btn-danger"
+                  >
+                    Sign Out
+                  </AppLink>
+                </div>
+              ) : (
+                <>
+                  <AppLink href="/login" className="text-center nav-link">
+                    Login
+                  </AppLink>
+                  <AppLink
+                    href="/register"
+                    className="text-center btn btn-success bg-dark mx-auto pl-3 pr-3"
+                  >
+                    Register
+                  </AppLink>
+                </>
+              )}
+            </Nav>
+          )}
         </Navbar.Collapse>
       </Navbar>
     </div>
   );
 };
 
-export default AppNavbar;
+export default withApollo(AppNavbar);
