@@ -5,6 +5,7 @@ const {
   projectQueries,
   projectMutations,
   userMutations,
+  userQueries,
 } = require("./resolvers");
 const { projectTypes, userTypes } = require("./types");
 const { buildAuthContext } = require("./context");
@@ -20,6 +21,7 @@ exports.createApolloServer = () => {
     type Query {
       project(id: ID): Project
       projects: [Project]
+      user: User
     }
 
     type Mutation {
@@ -35,7 +37,7 @@ exports.createApolloServer = () => {
 
   // resolvers
   const resolvers = {
-    Query: { ...projectQueries },
+    Query: { ...projectQueries, ...userQueries },
     Mutation: { ...projectMutations, ...userMutations },
   };
   const apolloServer = new ApolloServer({
