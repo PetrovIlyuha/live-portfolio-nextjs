@@ -9,7 +9,7 @@ export default (WrappedComponent, role) => (props) => {
     return <Redirect toPage="/login" />;
   }
   if (user) {
-    if (role && user.role !== role) {
+    if (role && !role.includes(user.role)) {
       return <Redirect toPage="/login" />;
     }
     return <WrappedComponent {...props} />;
