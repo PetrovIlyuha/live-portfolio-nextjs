@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Navbar, Nav } from "react-bootstrap";
+import { Navbar, Nav, NavDropdown } from "react-bootstrap";
 import styles from "./Navbar.module.css";
 import AppLink from "../utils/AppLink";
 import withApollo from "@/hoc/withApollo";
@@ -22,6 +22,8 @@ const AppNavbar = () => {
     }
     if (!hasResponse) setHasResponse(true);
   }
+  const checkPermissions = () =>
+    user.role === "admin" || user.role === "instructor";
   return (
     <div className="navbar-wrapper">
       <Navbar expand="lg" className="navbar-dark fj-mw9">
@@ -59,12 +61,27 @@ const AppNavbar = () => {
                       Weclome{" "}
                       <span style={{ color: "yellow" }}>{user.username}</span>
                     </span>
+
                     <img
                       src={user.avatar}
                       alt="User's Profile Photo Avatar"
                       className="avatar_rounded"
                     />
                   </div>
+                  <NavDropdown
+                    className="nav-link mr-3"
+                    title="Manage"
+                    id="basic-nav-dropdown"
+                  >
+                    {checkPermissions && (
+                      <AppLink href="/projects/new" className="dropdown-item">
+                        Create Project
+                      </AppLink>
+                    )}
+                    <NavDropdown.Item href="#action/3.2">
+                      Another action
+                    </NavDropdown.Item>
+                  </NavDropdown>
                   <AppLink
                     href="/logout"
                     className="text-center nav-link btn btn-danger"
