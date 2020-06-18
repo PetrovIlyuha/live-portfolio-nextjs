@@ -1,7 +1,25 @@
 import { useForm } from "react-hook-form";
+import DatePicker from "react-datepicker";
+import { useEffect, useState } from "react";
 
 const ProjectNewForm = ({ onSubmit }) => {
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit, setValue } = useForm();
+  const [startDate, setStartDate] = useState(null);
+  const [endDate, setEndDate] = useState(null);
+
+  useEffect(() => {
+    register({ name: "startDate" });
+    register({ name: "endDate" });
+  }, [register]);
+
+  const handleDateChange = (dateType, setDate) => (date) => {
+    setValue(
+      dateType,
+      (date && new Date(date.setHours(0, 0, 0, 0)).toISOString()) || date
+    );
+    setDate(date);
+  };
+
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <div className="form-group">
@@ -72,34 +90,53 @@ const ProjectNewForm = ({ onSubmit }) => {
 
       <div className="form-group">
         <label htmlFor="street">Start Date</label>
-        <input
-          ref={register}
-          name="startDate"
-          type="text"
-          className="form-control"
-          id="startDate"
-        />
+        <div>
+          <DatePicker
+            showYearDropdown
+            selected={startDate}
+            onChange={handleDateChange("startDate", setStartDate)}
+          />
+        </div>
       </div>
 
       <div className="form-group">
         <label htmlFor="street">End Date</label>
-        <input
-          ref={register}
-          name="endDate"
-          type="text"
-          className="form-control"
-          id="endDate"
-        />
+        <div>
+          <DatePicker
+            showYearDropdown
+            disabled={!endDate}
+            selected={endDate}
+            onChange={handleDateChange("endDate", setEndDate)}
+          />
+        </div>
+      </div>
+      <div className="form-group">
+        {endDate ? (
+          <button
+            type="button"
+            className="btn btn-danger"
+            onClick={() => handleDateChange("endDate", setEndDate)(null)}
+          >
+            Don't Show End Date
+          </button>
+        ) : (
+          <button
+            type="button"
+            className="btn btn-success"
+            onClick={() => handleDateChange("endDate", setEndDate)(new Date())}
+          >
+            Set end date
+          </button>
+        )}
       </div>
       <div className="form-group">
         <label htmlFor="progress">Is in progress Now?</label>
-        <input
-          type="text"
-          ref={register}
-          name="progress"
-          className="form-control"
-          id="progress"
-        />
+        <div>
+          <select name="progress" ref={register}>
+            <option name="yes">Yes</option>
+            <option name="no">No</option>
+          </select>
+        </div>
       </div>
 
       <button type="submit" className="btn btn-primary">
