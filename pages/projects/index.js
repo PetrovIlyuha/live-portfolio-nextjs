@@ -1,10 +1,5 @@
 import React from "react";
-import {
-  useCreateProject,
-  useDeleteProject,
-  useGetProjects,
-  useUpdateProject,
-} from "../../apollo/actions";
+import { useGetProjects } from "../../apollo/actions";
 
 import { Spinner } from "react-bootstrap";
 import withApollo from "@/hoc/withApollo";
@@ -14,9 +9,7 @@ import ProjectCard from "../../components/projects/ProjectCard";
 
 const Projects = () => {
   const { data, loading } = useGetProjects();
-  const [createProject] = useCreateProject();
-  const [deleteProject] = useDeleteProject();
-  const [updateProject] = useUpdateProject();
+  const projects = (data && data.projects) || [];
 
   if (loading)
     return (
@@ -28,8 +21,6 @@ const Projects = () => {
       />
     );
 
-  const projects = (data && data.projects) || [];
-
   return (
     <>
       <section className="section-title projects_page">
@@ -38,9 +29,6 @@ const Projects = () => {
             <h1>Projects</h1>
           </div>
         </div>
-        <button className="btn btn-secondary" onClick={createProject}>
-          Create New Project
-        </button>
       </section>
       <section className="pb-5">
         <div className="row">
@@ -51,22 +39,6 @@ const Projects = () => {
                   <ProjectCard project={project} />
                 </a>
               </Link>
-              <button
-                className="btn btn-secondary mt-5"
-                onClick={() =>
-                  updateProject({ variables: { id: project._id } })
-                }
-              >
-                Update Project
-              </button>
-              <button
-                className="btn btn-secondary ml-3 mt-5"
-                onClick={() =>
-                  deleteProject({ variables: { id: project._id } })
-                }
-              >
-                Delete Project
-              </button>
             </div>
           ))}
         </div>
