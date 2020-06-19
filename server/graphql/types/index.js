@@ -2,7 +2,7 @@ const projectFields = `
     title: String
     content: String
     stack: String
-    daysInMaking: Int
+    daysInMaking: String
     startDate: String
     endDate: String
     isInProgress: Boolean
