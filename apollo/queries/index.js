@@ -33,18 +33,28 @@ export const GET_PROJECTS = gql`
 `;
 
 export const CREATE_PROJECT = gql`
-  mutation CreateProject {
+  mutation CreateProject(
+    $title: String
+    $content: String
+    $stack: String
+    $link: String
+    $demoGif: String
+    $daysInMaking: String
+    $startDate: String
+    $endDate: String
+    $isInProgress: Boolean
+  ) {
     createProject(
       input: {
-        title: "Instagram Clone with React"
-        content: "Material UI and React with GraphQL based API clone of an Instagram App"
-        stack: "GraphQL, ReactJS, MaterialUI"
-        link: "https://instaclone-theta.now.sh/"
-        demoGif: "/insta_demo.gif"
-        daysInMaking: 34
-        startDate: "2020-03-10T23:59Z"
-        endDate: "2020-04-10T23:59Z"
-        isInProgress: true
+        title: $title
+        content: $content
+        stack: $stack
+        link: $link
+        demoGif: $demoGif
+        daysInMaking: $daysInMaking
+        startDate: $startDate
+        endDate: $endDate
+        isInProgress: $isInProgress
       }
     ) {
       _id
