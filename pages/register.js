@@ -4,6 +4,7 @@ import { SIGN_UP } from "@/apollo/queries";
 import withApollo from "@/hoc/withApollo";
 import Redirect from "./../components/shared/Redirect";
 import { ErrorMessage } from "react-hook-form";
+import BaseLayout from "../layouts/BaseLayout";
 
 const Register = () => {
   const errorMessage = (error) => {
@@ -13,7 +14,7 @@ const Register = () => {
     );
   };
   return (
-    <>
+    <BaseLayout>
       <div className="container mt-5">
         <div className="bwm-form">
           <div className="row">
@@ -40,7 +41,7 @@ const Register = () => {
           </div>
         </div>
       </div>
-    </>
+    </BaseLayout>
   );
 };
 

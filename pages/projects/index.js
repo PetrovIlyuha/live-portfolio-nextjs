@@ -1,5 +1,6 @@
 import React from "react";
 import { useGetProjects } from "../../apollo/actions";
+import BaseLayout from "../../layouts/BaseLayout";
 
 import { Spinner } from "react-bootstrap";
 import withApollo from "@/hoc/withApollo";
@@ -22,28 +23,32 @@ const Projects = () => {
     );
 
   return (
-    <>
-      <section className="section-title projects_page">
-        <div className="px-2">
-          <div className="pt-5 pb-4">
-            <h1>Projects</h1>
-          </div>
-        </div>
-      </section>
-      <section className="pb-5">
-        <div className="row">
-          {projects.map((project) => (
-            <div key={project._id} className="col-md-4 mb-5">
-              <Link href="/projects/[id]" as={`/projects/${project._id}`}>
-                <a className="card-link">
-                  <ProjectCard project={project} />
-                </a>
-              </Link>
+    <BaseLayout footer="relative">
+      <div className="projects_page projects_image_bg px-4">
+        <section className="section-title">
+          <div className="px-2">
+            <div className="pt-5 pb-4 text-center text-white">
+              <h1>Projects</h1>
             </div>
-          ))}
-        </div>
-      </section>
-    </>
+          </div>
+        </section>
+        <section className="pb-5">
+          <div className="container">
+            <div className="row">
+              {projects.map((project) => (
+                <div key={project._id} className="col-md-4 mb-5">
+                  <Link href="/projects/[id]" as={`/projects/${project._id}`}>
+                    <a className="card-link">
+                      <ProjectCard project={project} />
+                    </a>
+                  </Link>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      </div>
+    </BaseLayout>
   );
 };
 
