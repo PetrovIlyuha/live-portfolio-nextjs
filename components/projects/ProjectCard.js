@@ -12,7 +12,7 @@ const ProjectCard = ({ project }) => {
         </Card.Text>
         {/* <Image src={project.demoGif} style={{ width: "200px" }} rounded /> */}
         <p className="card-text fs-2">{project.content.substring(0, 60)}...</p>
-        <Button variant="info" className="text-center">
+        <Button variant="warning" className="text-center">
           <a href={project.link} className="text-white">
             See Full Project
           </a>
