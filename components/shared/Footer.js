@@ -1,8 +1,14 @@
 import React from "react";
 
-const Footer = () => {
+const Footer = ({ footer }) => {
+  const classPositionFooter =
+    footer === "absolute"
+      ? "sticky-absolute"
+      : footer === "relative"
+      ? "sticky-relative"
+      : "";
   return (
-    <footer id="sticky-footer" className="py-4 bg-black text-white-50 py-3">
+    <footer className={`py-4 bg-black py-3 ${classPositionFooter}`}>
       <small>Copyright &copy; {new Date().getFullYear()} Live Portfolio</small>
     </footer>
   );
