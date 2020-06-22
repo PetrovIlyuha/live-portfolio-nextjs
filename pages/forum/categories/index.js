@@ -1,8 +1,9 @@
 import React from "react";
+import BaseLayout from "../../../layouts/BaseLayout";
 
 const ForumCategories = () => {
   return (
-    <>
+    <BaseLayout>
       {/* FORUM CATEGORIES START */}
 
       <section className="section-title">
@@ -62,7 +63,7 @@ const ForumCategories = () => {
         </div>
       </section>
       {/* FORUM CATEGORIES ENDS */}
-    </>
+    </BaseLayout>
   );
 };
 

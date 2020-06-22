@@ -3,6 +3,7 @@ import withAuth from "@/hoc/withAuth";
 import { useCreateProject } from "@/apollo/actions";
 import { useRouter } from "next/router";
 import ProjectNewForm from "../../components/forms/ProjectNewForm";
+import BaseLayout from "../../layouts/BaseLayout";
 
 const ProjectNew = () => {
   const [createProject, { error, loading, data }] = useCreateProject();
@@ -25,7 +26,7 @@ const ProjectNew = () => {
     router.push("/projects");
   };
   return (
-    <>
+    <BaseLayout footer="relative">
       <div className="container">
         <section className="section-title">
           <div className="px-2">
@@ -51,7 +52,7 @@ const ProjectNew = () => {
           </div>
         </div>
       </div>
-    </>
+    </BaseLayout>
   );
 };
 

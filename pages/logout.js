@@ -3,6 +3,7 @@ import { Spinner } from "react-bootstrap";
 import { useRouter } from "next/router";
 import { useSignOut } from "../apollo/actions";
 import { useEffect } from "react";
+import BaseLayout from "../layouts/BaseLayout";
 
 const Logout = ({ apollo }) => {
   const [signOut] = useSignOut();
@@ -16,7 +17,7 @@ const Logout = ({ apollo }) => {
     });
   }, []);
   return (
-    <>
+    <BaseLayout>
       <div className="container">
         <div className="bwm-form mt-5">
           <div className="row">
@@ -29,7 +30,7 @@ const Logout = ({ apollo }) => {
           </div>
         </div>
       </div>
-    </>
+    </BaseLayout>
   );
 };
 

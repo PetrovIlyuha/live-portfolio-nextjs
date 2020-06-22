@@ -1,9 +1,10 @@
 import withApollo from "@/hoc/withApollo";
 import withAuth from "../hoc/withAuth";
+import BaseLayout from "../layouts/BaseLayout";
 
 const Secret = withAuth(() => {
   return (
-    <>
+    <BaseLayout>
       <div className="container">
         <section className="section-title">
           <div className="px-2">
@@ -14,7 +15,7 @@ const Secret = withAuth(() => {
           </div>
         </section>
       </div>
-    </>
+    </BaseLayout>
   );
 }, ["instructor"]);
 
