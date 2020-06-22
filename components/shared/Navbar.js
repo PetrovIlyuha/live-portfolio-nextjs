@@ -26,7 +26,7 @@ const AppNavbar = () => {
     user.role === "admin" || user.role === "instructor";
   return (
     <div className="navbar-wrapper">
-      <Navbar expand="lg" className="navbar-dark fj-mw9">
+      <Navbar expand="lg" className={styles.custom_navbar}>
         <Navbar.Brand className="mr-3 font-weight-bold">
           <AppLink href="/" className="h4 text-white navbar-brand">
             <img
@@ -39,7 +39,11 @@ const AppNavbar = () => {
         <Navbar.Toggle />
         <Navbar.Collapse>
           <Nav className="mr-auto">
-            <AppLink href="/projects" className="text-center nav-link scale_up">
+            <AppLink
+              href="/projects"
+              className="text-center nav-link scale_up"
+              style={{ color: "white !important" }}
+            >
               Projects
             </AppLink>
             <AppLink
@@ -84,7 +88,7 @@ const AppNavbar = () => {
                   </NavDropdown>
                   <AppLink
                     href="/logout"
-                    className="text-center nav-link btn btn-danger"
+                    className="text-center sign_out_link btn btn-danger"
                   >
                     Sign Out
                   </AppLink>
