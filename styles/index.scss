@@ -192,7 +192,10 @@ html {
   background-color: $black-navigation;
 
   .nav-link {
-    font-size: 14px;
+    font-size: 16px;
+    font-weight: 600;
+    color: rgb(53, 173, 101) !important;
+    font-family: "Cabin", sans-serif;
   }
 
   &-brand {
@@ -218,18 +221,31 @@ html {
 }
 
 .portfolio-app {
-  height: 100%;
+  min-height: 100%;
 }
 
 .page-wrapper {
   padding-bottom: 60px;
 }
 
-#sticky-footer {
-  background-color: #141618;
-  // position: absolute;
-  // bottom: 0;
-  // left: 0;
+.sticky-absolute {
+  background-color: #b91e71;
+  background-image: linear-gradient(0deg, #b91e71 0%, #1f2960 52%, #140e43 90%);
+  position: absolute;
+  color: white !important;
+  bottom: 0;
+  left: 0;
+  width: 100vw;
+}
+
+.sticky-relative {
+  background-color: #b91e71;
+  background-image: linear-gradient(0deg, #b91e71 0%, #1f2960 52%, #140e43 90%);
+  position: relative;
+  color: white !important;
+  bottom: 0;
+  left: 0;
+  width: 100vw;
 }
 
 .fj-hero {
@@ -239,8 +255,14 @@ html {
   justify-content: center;
   width: 100%;
   min-height: 50vh;
-  background-image: linear-gradient(170deg, #212a39 0%, #181e28 100%);
+  background: url("../public/hero-image.jpg") no-repeat;
+  background-position: center;
+  background-size: cover;
+  font-family: "Anton", sans-serif;
 
+  // background: #ef3b36;
+  // background: -webkit-linear-gradient(to right, #ffffff, #ef3b36);
+  // background: linear-gradient(to bottom, #ffffff, #ef3b36);
   &-wrapper {
     max-width: 1180px;
     margin: 0 auto;
@@ -255,13 +277,14 @@ html {
       font-size: 48px;
       line-height: 56px;
       font-weight: 500;
+      color: rgb(53, 173, 101);
       margin: 0;
     }
 
     .hero-subtitle {
       font-size: 24px;
       line-height: 33px;
-      color: $gray-50;
+      color: #ffafbd;
       font-weight: 400;
       margin: 15px 0 55px 0;
     }
@@ -758,8 +781,9 @@ html {
 
   /* Custom page header */
   .header {
-    padding-bottom: 1rem;
+    padding-bottom: 4rem;
     border-bottom: 0.05rem solid #e5e5e5;
+    background-color: red;
   }
   /* Make the masthead heading the same height as the navigation */
   .header h3 {
@@ -825,9 +849,14 @@ html {
 
 // Projects Page Styles
 .projects_page {
-  font-family: "Cabin", sans-serif;
+  font-family: "Cabin", sans-serif !important;
 }
 
+.projects_image_bg {
+  background: url(../public/projects-image.jpg);
+  background-size: cover;
+  width: 100%;
+}
 // * User's Navbar Section Personal Info and Greeting
 .avatar_rounded {
   border-radius: 50%;
@@ -843,7 +872,7 @@ html {
 .user_personal_navbar {
   display: flex;
   flex-direction: row;
-  width: 400px;
+  min-width: 500px;
   justify-content: space-around;
   align-items: center;
   margin: 0 auto;
@@ -852,7 +881,7 @@ html {
 .user_greeting {
   display: flex;
   flex-direction: row;
-  width: 220px;
+  min-width: 240px;
   justify-content: space-around;
   align-items: center;
   align-content: center;
@@ -861,8 +890,13 @@ html {
 
 // Transitions & animations in Navbar
 .scale_up {
-  transition: 0.3s ease-in;
+  transition: 0.3s ease;
 }
 .scale_up:hover {
   transform: scale(1.1);
+  color: yellow;
+}
+
+.h-100 {
+  height: 100vh !important;
 }
