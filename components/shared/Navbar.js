@@ -1,9 +1,9 @@
-import { useState, useEffect } from "react";
-import { Navbar, Nav, NavDropdown } from "react-bootstrap";
-import styles from "./Navbar.module.css";
-import AppLink from "../utils/AppLink";
-import withApollo from "@/hoc/withApollo";
-import { useLazyGetUser } from "../../apollo/actions";
+import { useState, useEffect } from 'react';
+import { Navbar, Nav, NavDropdown } from 'react-bootstrap';
+import styles from './Navbar.module.css';
+import AppLink from '../utils/AppLink';
+import withApollo from '@/hoc/withApollo';
+import { useLazyGetUser } from '../../apollo/actions';
 
 const AppNavbar = () => {
   const [user, setUser] = useState(null);
@@ -23,9 +23,9 @@ const AppNavbar = () => {
     if (!hasResponse) setHasResponse(true);
   }
   const checkPermissions = () =>
-    user.role === "admin" || user.role === "instructor";
+    user.role === 'admin' || user.role === 'instructor';
   return (
-    <div className="navbar-wrapper">
+    <div className="navbar-wrapper fixed-top">
       <Navbar expand="lg" className={styles.custom_navbar}>
         <Navbar.Brand className="mr-3 font-weight-bold">
           <AppLink href="/" className="h4 text-white navbar-brand">
@@ -42,7 +42,7 @@ const AppNavbar = () => {
             <AppLink
               href="/projects"
               className="text-center nav-link scale_up"
-              style={{ color: "white !important" }}
+              style={{ color: 'white !important' }}
             >
               Projects
             </AppLink>
@@ -62,8 +62,8 @@ const AppNavbar = () => {
                 <div className="user_personal_navbar">
                   <div className="user_greeting">
                     <span className="nav-link mr-4">
-                      Weclome{" "}
-                      <span style={{ color: "yellow" }}>{user.username}</span>
+                      Weclome{' '}
+                      <span style={{ color: 'yellow' }}>{user.username}</span>
                     </span>
 
                     <img
@@ -78,13 +78,19 @@ const AppNavbar = () => {
                     id="basic-nav-dropdown"
                   >
                     {checkPermissions && (
-                      <AppLink href="/projects/new" className="dropdown-item">
-                        Create Project
-                      </AppLink>
+                      <>
+                        <AppLink href="/projects/new" className="dropdown-item">
+                          Create Project
+                        </AppLink>
+                        <AppLink
+                          href="/instructor/[id]/dashboard"
+                          as={`/instructor/${user._id}/dashboard`}
+                          className="dropdown-item"
+                        >
+                          Dashboard
+                        </AppLink>
+                      </>
                     )}
-                    <NavDropdown.Item href="#action/3.2">
-                      Another action
-                    </NavDropdown.Item>
                   </NavDropdown>
                   <AppLink
                     href="/logout"
