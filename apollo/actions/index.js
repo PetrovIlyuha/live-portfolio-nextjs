@@ -1,18 +1,21 @@
 import {
   GET_PROJECTS,
-  UPDATE_PORTFOLIO,
+  UPDATE_PROJECT,
   CREATE_PROJECT,
   DELETE_PROJECT,
+  GET_USER_PROJECTS,
   SIGN_IN,
   GET_USER,
   SIGN_OUT,
-} from "../queries";
+  GET_PROJECT_BY_ID,
+} from '../queries';
 
-import { useQuery, useMutation, useLazyQuery } from "@apollo/react-hooks";
+import { useQuery, useMutation, useLazyQuery } from '@apollo/react-hooks';
 
 export const useGetProjects = () => useQuery(GET_PROJECTS);
-
-export const useUpdateProject = () => useMutation(UPDATE_PORTFOLIO);
+export const useGetProject = options => useQuery(GET_PROJECT_BY_ID, options);
+export const useGetUserProjects = () => useQuery(GET_USER_PROJECTS);
+export const useUpdateProject = () => useMutation(UPDATE_PROJECT);
 
 export const useCreateProject = () =>
   useMutation(CREATE_PROJECT, {
@@ -28,11 +31,11 @@ export const useCreateProject = () =>
 export const useDeleteProject = () =>
   useMutation(DELETE_PROJECT, {
     update(cache, { data: { deleteProject } }) {
-      const { projects } = cache.readQuery({ query: GET_PROJECTS });
-      const newProjects = projects.filter((p) => p._id !== deleteProject);
+      const { userProjects } = cache.readQuery({ query: GET_USER_PROJECTS });
+      const newProjects = userProjects.filter(p => p._id !== deleteProject);
       cache.writeQuery({
-        query: GET_PROJECTS,
-        data: { projects: newProjects },
+        query: GET_USER_PROJECTS,
+        data: { userProjects: newProjects },
       });
     },
   });
