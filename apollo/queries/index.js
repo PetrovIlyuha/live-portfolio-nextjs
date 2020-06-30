@@ -1,4 +1,4 @@
-import { gql } from "apollo-boost";
+import { gql } from 'apollo-boost';
 
 export const GET_PROJECT_BY_ID = gql`
   query Project($id: ID) {
@@ -28,6 +28,19 @@ export const GET_PROJECTS = gql`
       isInProgress
       demoGif
       link
+    }
+  }
+`;
+
+export const GET_USER_PROJECTS = gql`
+  query UserProjects {
+    userProjects {
+      _id
+      title
+      content
+      stack
+      startDate
+      endDate
     }
   }
 `;
@@ -71,20 +84,31 @@ export const CREATE_PROJECT = gql`
   }
 `;
 
-export const UPDATE_PORTFOLIO = gql`
-  mutation UpdateProject($id: ID) {
+export const UPDATE_PROJECT = gql`
+  mutation UpdateProject(
+    $id: ID
+    $title: String
+    $content: String
+    $stack: String
+    $link: String
+    $demoGif: String
+    $daysInMaking: String
+    $startDate: String
+    $endDate: String
+    $isInProgress: Boolean
+  ) {
     updateProject(
       id: $id
       input: {
-        title: "Instagram Clone with React"
-        content: "Material UI and React with GraphQL based API clone of an Instagram App"
-        stack: "GraphQL, ReactJS, MaterialUI"
-        link: "https://instaclone-theta.now.sh/"
-        demoGif: "/insta_demo.gif"
-        daysInMaking: 34
-        startDate: "2020-04-03T23:59Z"
-        endDate: "2020-06-05T23:59Z"
-        isInProgress: true
+        title: $title
+        content: $content
+        stack: $stack
+        link: $link
+        demoGif: $demoGif
+        daysInMaking: $daysInMaking
+        startDate: $startDate
+        endDate: $endDate
+        isInProgress: $isInProgress
       }
     ) {
       _id
