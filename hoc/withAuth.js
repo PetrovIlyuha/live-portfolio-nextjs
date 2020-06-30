@@ -1,9 +1,9 @@
-import { useGetUser } from "../apollo/actions";
-import Redirect from "../components/shared/Redirect";
+import { useGetUser } from '../apollo/actions';
+import Redirect from '../components/shared/Redirect';
 
-export default (WrappedComponent, role) => (props) => {
+export default (WrappedComponent, role) => props => {
   const { data: { user } = {}, loading, error } = useGetUser({
-    fetchPolicy: "network-only",
+    fetchPolicy: 'network-only',
   });
   if (!loading && (!user || error) && typeof window !== undefined) {
     return <Redirect toPage="/login" />;
@@ -14,5 +14,5 @@ export default (WrappedComponent, role) => (props) => {
     }
     return <WrappedComponent {...props} />;
   }
-  return <p>Authentication in process"</p>;
+  return null;
 };
