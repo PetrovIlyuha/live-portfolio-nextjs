@@ -1,18 +1,30 @@
-import { useForm } from "react-hook-form";
-import DatePicker from "react-datepicker";
-import { useEffect, useState } from "react";
+import { useForm } from 'react-hook-form';
+import DatePicker from 'react-datepicker';
+import { useEffect, useState } from 'react';
 
-const ProjectNewForm = ({ onSubmit }) => {
-  const { register, handleSubmit, setValue } = useForm();
+const ProjectNewForm = ({ onSubmit, initialData = {}, status = 'Create' }) => {
+  const { register, handleSubmit, setValue } = useForm({
+    defaultValues: initialData,
+  });
   const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
 
   useEffect(() => {
-    register({ name: "startDate" });
-    register({ name: "endDate" });
+    register({ name: 'startDate' });
+    register({ name: 'endDate' });
   }, [register]);
 
-  const handleDateChange = (dateType, setDate) => (date) => {
+  useEffect(() => {
+    const { startDate, endDate } = initialData;
+    if (startDate) {
+      setStartDate(new Date(parseInt(startDate, 10)));
+    }
+    if (endDate) {
+      setEndDate(new Date(parseInt(endDate, 10)));
+    }
+  }, [initialData]);
+
+  const handleDateChange = (dateType, setDate) => date => {
     setValue(
       dateType,
       (date && new Date(date.setHours(0, 0, 0, 0)).toISOString()) || date
@@ -99,7 +111,7 @@ const ProjectNewForm = ({ onSubmit }) => {
           <DatePicker
             showYearDropdown
             selected={startDate}
-            onChange={handleDateChange("startDate", setStartDate)}
+            onChange={handleDateChange('startDate', setStartDate)}
           />
         </div>
       </div>
@@ -111,7 +123,7 @@ const ProjectNewForm = ({ onSubmit }) => {
             showYearDropdown
             disabled={!endDate}
             selected={endDate}
-            onChange={handleDateChange("endDate", setEndDate)}
+            onChange={handleDateChange('endDate', setEndDate)}
           />
         </div>
       </div>
@@ -120,7 +132,7 @@ const ProjectNewForm = ({ onSubmit }) => {
           <button
             type="button"
             className="btn btn-danger"
-            onClick={() => handleDateChange("endDate", setEndDate)(null)}
+            onClick={() => handleDateChange('endDate', setEndDate)(null)}
           >
             Don't Show End Date
           </button>
@@ -128,7 +140,7 @@ const ProjectNewForm = ({ onSubmit }) => {
           <button
             type="button"
             className="btn btn-success"
-            onClick={() => handleDateChange("endDate", setEndDate)(new Date())}
+            onClick={() => handleDateChange('endDate', setEndDate)(new Date())}
           >
             Set end date
           </button>
@@ -145,7 +157,7 @@ const ProjectNewForm = ({ onSubmit }) => {
       </div>
 
       <button type="submit" className="btn btn-primary">
-        Create
+        {status}
       </button>
     </form>
   );
