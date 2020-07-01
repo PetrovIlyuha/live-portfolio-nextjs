@@ -1,12 +1,12 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-const bcrypt = require("bcryptjs");
+const bcrypt = require('bcryptjs');
 
 const userSchema = new Schema({
   avatar: String,
   email: {
     type: String,
-    required: "Email is required",
+    required: 'Email is required',
     lowercase: true,
     index: true,
     unique: true,
@@ -14,7 +14,7 @@ const userSchema = new Schema({
   },
   name: {
     type: String,
-    minlength: [6, "Name length should exceed 6 characters"],
+    minlength: [6, 'Name length should exceed 6 characters'],
   },
   username: {
     type: String,
@@ -23,21 +23,21 @@ const userSchema = new Schema({
   },
   password: {
     type: String,
-    minlength: [6, "Minimum password length is 6 characters"],
-    maxlength: [20, "Maximum password length is 20 characters"],
+    minlength: [6, 'Minimum password length is 6 characters'],
+    maxlength: [20, 'Maximum password length is 20 characters'],
     required: true,
   },
   role: {
-    enum: ["guest", "admin", "instructor"],
+    enum: ['guest', 'admin', 'instructor'],
     type: String,
     required: true,
-    default: "guest",
+    default: 'guest',
   },
   info: String,
-  createdAt: { type: Date, default: Date },
+  createdAt: { type: Date, default: Date.now },
 });
 
-userSchema.pre("save", function (next) {
+userSchema.pre('save', function (next) {
   const user = this;
   bcrypt.genSalt(10, function (err, salt) {
     if (err) {
@@ -62,4 +62,4 @@ userSchema.methods.validatePassword = function (candidatePassword, done) {
   });
 };
 
-module.exports = mongoose.model("User", userSchema);
+module.exports = mongoose.model('User', userSchema);

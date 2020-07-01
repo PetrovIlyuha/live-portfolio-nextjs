@@ -11,7 +11,6 @@ class User {
   }
 
   async signUp(signUpData) {
-    console.log(signUpData);
     if (signUpData.password !== signUpData.passwordConfirmation) {
       throw new Error("Passwords don't match");
     } else if (!signUpData.username.trim()) {
