@@ -5,6 +5,9 @@ exports.projectQueries = {
   projects: (root, args, ctx) => {
     return ctx.models.Project.getAll();
   },
+  userProjects: (root, args, ctx) => {
+    return ctx.models.Project.getAllByUser();
+  },
 };
 
 exports.projectMutations = {

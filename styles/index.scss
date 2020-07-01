@@ -1,8 +1,8 @@
-@import url("https://fonts.googleapis.com/css2?family=Anton&family=Cabin:ital,wght@0,400;0,500;1,500;1,600&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Anton&family=Cabin:ital,wght@0,400;0,500;1,500;1,600&display=swap');
 // font-family: 'Anton', sans-serif;
 // font-family: 'Cabin', sans-serif;
 $main-color-blue: #316aff;
-$main-color-red: "red";
+$main-color-red: 'red';
 
 $white: #fff !default;
 $gray-10: #f8f9fa !default;
@@ -35,7 +35,7 @@ $cyan: #17a2b8 !default;
 body {
   -webkit-font-smoothing: antialiased;
   background-color: $white;
-  font-family: "Cabin", sans-serif !important;
+  font-family: 'Cabin', sans-serif !important;
   margin: 0;
   padding: 0;
   min-height: 100%;
@@ -195,7 +195,7 @@ html {
     font-size: 16px;
     font-weight: 600;
     color: rgb(53, 173, 101) !important;
-    font-family: "Cabin", sans-serif;
+    font-family: 'Cabin', sans-serif;
   }
 
   &-brand {
@@ -253,12 +253,13 @@ html {
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-top: 100px;
   width: 100%;
   min-height: 50vh;
-  background: url("../public/hero-image.jpg") no-repeat;
+  background: url('../public/hero-image.jpg') no-repeat;
   background-position: center;
   background-size: cover;
-  font-family: "Anton", sans-serif;
+  font-family: 'Anton', sans-serif;
 
   // background: #ef3b36;
   // background: -webkit-linear-gradient(to right, #ffffff, #ef3b36);
@@ -697,7 +698,7 @@ html {
     display: inline-flex;
     align-items: center;
     transition: color 200ms, background-color 200ms, border-color 200ms;
-    font-family: "Open Sans", Helvetica, Arial, sans-serif;
+    font-family: 'Open Sans', Helvetica, Arial, sans-serif;
     font-size: 15px;
     font-weight: 400;
     line-height: normal;
@@ -758,7 +759,7 @@ html {
 .portfolio-detail {
   // Detail Page START
   padding-top: 20px;
-
+  margin-top: 80px;
   .marketing {
     .title {
       font-size: 31px;
@@ -849,7 +850,7 @@ html {
 
 // Projects Page Styles
 .projects_page {
-  font-family: "Cabin", sans-serif !important;
+  font-family: 'Cabin', sans-serif !important;
 }
 
 .projects_image_bg {
