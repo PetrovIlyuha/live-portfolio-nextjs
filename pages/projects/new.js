@@ -1,29 +1,33 @@
-import withApollo from "@/hoc/withApollo";
-import withAuth from "@/hoc/withAuth";
-import { useCreateProject } from "@/apollo/actions";
-import { useRouter } from "next/router";
-import ProjectNewForm from "../../components/forms/ProjectNewForm";
-import BaseLayout from "../../layouts/BaseLayout";
+import withApollo from '@/hoc/withApollo';
+import withAuth from '@/hoc/withAuth';
+import { useCreateProject } from '@/apollo/actions';
+import { useRouter } from 'next/router';
+import ProjectNewForm from '../../components/forms/ProjectNewForm';
+import BaseLayout from '../../layouts/BaseLayout';
+import { toast } from 'react-toastify';
 
 const ProjectNew = () => {
   const [createProject, { error, loading, data }] = useCreateProject();
   const router = useRouter();
 
-  const errorMessage = (error) => {
+  const errorMessage = error => {
     return (
       (error.graphQLErrors && error.graphQLErrors[0]?.message) ||
-      "Something went wrong!"
+      'Something went wrong!'
     );
   };
 
   const notifyOnCreateSuccess = () => {
-    return "Project Successfully Created!";
+    toast.success('Project was created!', {
+      hideProgressBar: true,
+      autoClose: 3000,
+    });
   };
 
-  const handleCreateProject = async (data) => {
+  const handleCreateProject = async data => {
     await createProject({ variables: data });
     notifyOnCreateSuccess();
-    router.push("/projects");
+    router.push('/projects');
   };
   return (
     <BaseLayout footer="relative">
@@ -43,11 +47,7 @@ const ProjectNew = () => {
               {error && (
                 <div className="alert alert-danger">{errorMessage(error)}</div>
               )}
-              {!loading && data && (
-                <div className="alert alert-success">
-                  {notifyOnCreateSuccess()}
-                </div>
-              )}
+              {!loading && data && notifyOnCreateSuccess()}
             </div>
           </div>
         </div>
@@ -56,4 +56,4 @@ const ProjectNew = () => {
   );
 };
 
-export default withApollo(withAuth(ProjectNew, ["admin", "instructor"]));
+export default withApollo(withAuth(ProjectNew, ['admin', 'instructor']));

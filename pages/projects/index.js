@@ -1,12 +1,12 @@
-import React from "react";
-import { useGetProjects } from "../../apollo/actions";
-import BaseLayout from "../../layouts/BaseLayout";
+import React from 'react';
+import { useGetProjects } from '../../apollo/actions';
+import BaseLayout from '../../layouts/BaseLayout';
 
-import { Spinner } from "react-bootstrap";
-import withApollo from "@/hoc/withApollo";
-import { getDataFromTree } from "@apollo/react-ssr";
-import Link from "next/link";
-import ProjectCard from "../../components/projects/ProjectCard";
+import { Spinner } from 'react-bootstrap';
+import withApollo from '@/hoc/withApollo';
+import { getDataFromTree } from '@apollo/react-ssr';
+import Link from 'next/link';
+import ProjectCard from '../../components/projects/ProjectCard';
 
 const Projects = () => {
   const { data, loading } = useGetProjects();
@@ -35,7 +35,7 @@ const Projects = () => {
         <section className="pb-5">
           <div className="container">
             <div className="row">
-              {projects.map((project) => (
+              {projects.map(project => (
                 <div key={project._id} className="col-md-4 mb-5">
                   <Link href="/projects/[id]" as={`/projects/${project._id}`}>
                     <a className="card-link">
