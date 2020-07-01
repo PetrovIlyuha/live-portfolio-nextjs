@@ -5,16 +5,19 @@ import { ApolloProvider } from '@apollo/react-hooks';
 export default withApollo(
   ({ initialState }) => {
     return new ApolloClient({
-      // request: operation => {
-      //   operation.setContext({
-      //     fetchOptions: {
-      //       credentials: 'include',
-      //     },
-      //     headers,
-      //   });
-      // },
       uri: 'http://localhost:3000/graphql',
       cache: new InMemoryCache().restore(initialState || {}),
+      resolvers: {
+        Project: {
+          developmentTime(data, args, ctx) {
+            if (data.endDate) {
+              return (data.endDate - data.startDate) / (3600000 * 24);
+            } else {
+              return Math.floor((Date.now() - data.startDate) / (3600000 * 24));
+            }
+          },
+        },
+      },
     });
   },
   {
