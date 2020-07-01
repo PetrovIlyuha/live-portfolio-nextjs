@@ -8,6 +8,7 @@ export const GET_PROJECT_BY_ID = gql`
       content
       stack
       daysInMaking
+      developmentTime @client
       isInProgress
       startDate
       endDate

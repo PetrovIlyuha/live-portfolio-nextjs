@@ -1,5 +1,5 @@
-import React from "react";
-import { Card, Button } from "react-bootstrap";
+import React from 'react';
+import { Card, Button } from 'react-bootstrap';
 
 const ProjectCard = ({ project }) => {
   return (
@@ -20,7 +20,7 @@ const ProjectCard = ({ project }) => {
       </Card.Body>
       <div className="card-footer no-border">
         <small className="text-muted">
-          Days in Making: {project.daysInMaking}
+          Days in Making: {project.developmentTime}
         </small>
       </div>
     </div>
