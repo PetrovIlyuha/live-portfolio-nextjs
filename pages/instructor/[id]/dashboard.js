@@ -5,6 +5,7 @@ import BaseLayout from '../../../layouts/BaseLayout';
 import { Card, Button } from 'react-bootstrap';
 import { getDataFromTree } from '@apollo/react-ssr';
 import { useGetUserProjects, useDeleteProject } from '@/apollo/actions';
+import { formatDate } from '../../../utils/functions';
 import Link from 'next/link';
 
 const InstructorDashboard = withAuth(() => {
@@ -12,7 +13,6 @@ const InstructorDashboard = withAuth(() => {
   const { data } = useGetUserProjects();
   const [deleteProject] = useDeleteProject();
   const userProjects = (data && data.userProjects) || [];
-  // console.log(userProjects);
   return (
     <BaseLayout>
       <div className="container h-100">
@@ -27,8 +27,10 @@ const InstructorDashboard = withAuth(() => {
                     <Card.Title>{project.title}</Card.Title>
                     <Card.Text>{project.stack}</Card.Text>
                     <Card.Text>
-                      {project.startDate} -{' '}
-                      {project.endDate || 'currently in progress'}
+                      {formatDate(project.startDate)} -{' '}
+                      {(project.endDate && formatDate(project.endDate)) || (
+                        <b>Still in progress</b>
+                      )}
                     </Card.Text>
                     <Link
                       href="/projects/[id]/edit"
