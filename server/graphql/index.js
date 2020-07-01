@@ -1,17 +1,17 @@
-const mongoose = require("mongoose");
-const { ApolloServer, gql } = require("apollo-server-express");
+const mongoose = require('mongoose');
+const { ApolloServer, gql } = require('apollo-server-express');
 
 const {
   projectQueries,
   projectMutations,
   userMutations,
   userQueries,
-} = require("./resolvers");
-const { projectTypes, userTypes } = require("./types");
-const { buildAuthContext } = require("./context");
+} = require('./resolvers');
+const { projectTypes, userTypes } = require('./types');
+const { buildAuthContext } = require('./context');
 
-const Project = require("./models/Project");
-const User = require("./models/User");
+const Project = require('./models/Project');
+const User = require('./models/User');
 
 exports.createApolloServer = () => {
   const typeDefs = gql`
@@ -21,6 +21,7 @@ exports.createApolloServer = () => {
     type Query {
       project(id: ID): Project
       projects: [Project]
+      userProjects: [Project]
       user: User
     }
 
@@ -46,8 +47,8 @@ exports.createApolloServer = () => {
     context: ({ req }) => ({
       ...buildAuthContext(req),
       models: {
-        Project: new Project(mongoose.model("Project"), req.user),
-        User: new User(mongoose.model("User")),
+        Project: new Project(mongoose.model('Project'), req.user),
+        User: new User(mongoose.model('User')),
       },
     }),
   });
