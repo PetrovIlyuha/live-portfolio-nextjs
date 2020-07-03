@@ -1,26 +1,17 @@
 import React from 'react';
 import { useGetProjects } from '../../apollo/actions';
 import BaseLayout from '../../layouts/BaseLayout';
-
-import { Spinner } from 'react-bootstrap';
 import withApollo from '@/hoc/withApollo';
 import { getDataFromTree } from '@apollo/react-ssr';
 import Link from 'next/link';
 import ProjectCard from '../../components/projects/ProjectCard';
+import SpinnerLoader from '../../components/shared/Loader';
 
 const Projects = () => {
   const { data, loading } = useGetProjects();
   const projects = (data && data.projects) || [];
 
-  if (loading)
-    return (
-      <Spinner
-        animation="grow"
-        variant="danger"
-        size="lg"
-        style={{ marginTop: 100 }}
-      />
-    );
+  if (loading) return <SpinnerLoader />;
 
   return (
     <BaseLayout footer="relative">
