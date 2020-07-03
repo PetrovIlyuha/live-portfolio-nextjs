@@ -1,18 +1,28 @@
-import withApollo from "@/hoc/withApollo";
-import { Spinner } from "react-bootstrap";
-import { useRouter } from "next/router";
-import { useSignOut } from "../apollo/actions";
-import { useEffect } from "react";
-import BaseLayout from "../layouts/BaseLayout";
+import withApollo from '@/hoc/withApollo';
+import { useRouter } from 'next/router';
+import { useSignOut } from '@/apollo/actions';
+import { useEffect } from 'react';
+import BaseLayout from '@/layouts/BaseLayout';
+import { toast } from 'react-toastify';
+import SpinnerLoader from '../components/shared/Loader';
 
 const Logout = ({ apollo }) => {
-  const [signOut] = useSignOut();
   const router = useRouter();
+  const [signOut] = useSignOut();
+  useEffect(() => {
+    const displayFarewell = () => {
+      toast.success('Oh...OK! See you next time!', {
+        hideProgressBar: true,
+        autoClose: 6000,
+      });
+    };
+    displayFarewell();
+  }, []);
 
   useEffect(() => {
     signOut().then(() => {
       apollo.resetStore().then(() => {
-        router.push("/login");
+        router.push('/');
       });
     });
   }, []);
@@ -24,7 +34,7 @@ const Logout = ({ apollo }) => {
             <div className="col-md-5 mx-auto">
               <h1 className="page-title text-center">Logout</h1>
               <div className="text-center">
-                <Spinner animation="border" />
+                <SpinnerLoader />
               </div>
             </div>
           </div>
