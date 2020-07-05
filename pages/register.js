@@ -1,16 +1,15 @@
-import RegisterForm from "@/components/forms/RegisterForm";
-import { Mutation } from "react-apollo";
-import { SIGN_UP } from "@/apollo/queries";
-import withApollo from "@/hoc/withApollo";
-import Redirect from "./../components/shared/Redirect";
-import { ErrorMessage } from "react-hook-form";
-import BaseLayout from "../layouts/BaseLayout";
+import RegisterForm from '@/components/forms/RegisterForm';
+import { Mutation } from 'react-apollo';
+import { SIGN_UP } from '@/apollo/queries';
+import withApollo from '@/hoc/withApollo';
+import Redirect from './../components/shared/Redirect';
+import BaseLayout from '../layouts/BaseLayout';
 
 const Register = () => {
-  const errorMessage = (error) => {
+  const errorMessage = error => {
     return (
       (error.graphQLErrors && error.graphQLErrors[0].message) ||
-      "Something went wrong!"
+      'Something went wrong!'
     );
   };
   return (
@@ -24,11 +23,16 @@ const Register = () => {
                 {(signUpUser, { data, error }) => (
                   <>
                     <RegisterForm
-                      onSubmit={(registerData) => {
+                      onSubmit={registerData => {
                         signUpUser({ variables: registerData });
                       }}
                     />
-                    {data && data.signUp && <Redirect toPage="/login" />}
+                    {data && data.signUp && (
+                      <Redirect
+                        toPage="/login"
+                        query={{ message: 'REGISTERED' }}
+                      />
+                    )}
                     {error && (
                       <div className="alert alert-danger">
                         {errorMessage(error)}
