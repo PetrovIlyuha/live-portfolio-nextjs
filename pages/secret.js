@@ -1,11 +1,11 @@
-import withApollo from "@/hoc/withApollo";
-import withAuth from "../hoc/withAuth";
-import BaseLayout from "../layouts/BaseLayout";
+import withApollo from '@/hoc/withApollo';
+import withAuth from '@/hoc/withAuth';
+import BaseLayout from '@/layouts/BaseLayout';
 
 const Secret = withAuth(() => {
   return (
-    <BaseLayout>
-      <div className="container">
+    <BaseLayout footer="absolute">
+      <div className="container" style={{ marginTop: '45vh' }}>
         <section className="section-title">
           <div className="px-2">
             <div className="pt-5 pb-4 text-center">
@@ -17,6 +17,6 @@ const Secret = withAuth(() => {
       </div>
     </BaseLayout>
   );
-}, ["instructor"]);
+}, ['instructor', 'admin']);
 
 export default withApollo(Secret);
