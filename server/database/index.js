@@ -1,10 +1,12 @@
-const mongoose = require("mongoose");
-const config = require("../config/dev");
-const session = require("express-session");
-const MongoDBStore = require("connect-mongodb-session")(session);
+const mongoose = require('mongoose');
+const config = require('../config/dev');
+const session = require('express-session');
+const MongoDBStore = require('connect-mongodb-session')(session);
 
-require("./models/project");
-require("./models/user");
+require('./models/project');
+require('./models/user');
+require('./models/forumCategory');
+require('./models/topic');
 
 exports.connect = () => {
   mongoose.connect(
@@ -16,7 +18,7 @@ exports.connect = () => {
       useCreateIndex: true,
     },
     () => {
-      console.log("Mongo Atlas Cluster successfully connected ✅");
+      console.log('Mongo Atlas Cluster successfully connected ✅');
     }
   );
 };
@@ -24,7 +26,7 @@ exports.connect = () => {
 exports.initSessionStore = () => {
   const store = new MongoDBStore({
     uri: config.DB_URI,
-    collection: "projectSessions",
+    collection: 'projectSessions',
   });
   return store;
 };
