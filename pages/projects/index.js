@@ -14,7 +14,7 @@ const Projects = () => {
   if (loading) return <SpinnerLoader />;
 
   return (
-    <BaseLayout footer="relative">
+    <BaseLayout footer="absolute">
       <div className="projects_page projects_image_bg px-4">
         <section className="section-title">
           <div className="px-2">
