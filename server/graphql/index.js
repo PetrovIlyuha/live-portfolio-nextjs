@@ -7,6 +7,7 @@ const {
   userMutations,
   userQueries,
   forumQueries,
+  forumMutations,
 } = require('./resolvers');
 const { projectTypes, userTypes, forumTypes } = require('./types');
 const { buildAuthContext } = require('./context');
@@ -36,6 +37,8 @@ exports.createApolloServer = () => {
       updateProject(id: ID, input: ProjectInput): Project
       deleteProject(id: ID): ID
 
+      createTopic(input: TopicInput): Topic
+
       signUp(input: SignUpInput): String
       signIn(input: SignInInput): User
       signOut: Boolean
@@ -45,7 +48,7 @@ exports.createApolloServer = () => {
   // resolvers
   const resolvers = {
     Query: { ...projectQueries, ...userQueries, ...forumQueries },
-    Mutation: { ...projectMutations, ...userMutations },
+    Mutation: { ...projectMutations, ...userMutations, ...forumMutations },
   };
   const apolloServer = new ApolloServer({
     typeDefs,
@@ -56,7 +59,7 @@ exports.createApolloServer = () => {
         Project: new Project(mongoose.model('Project'), req.user),
         User: new User(mongoose.model('User')),
         ForumCategory: new ForumCategory(mongoose.model('ForumCategory')),
-        Topic: new Topic(mongoose.model('Topic')),
+        Topic: new Topic(mongoose.model('Topic'), req.user),
       },
     }),
   });
