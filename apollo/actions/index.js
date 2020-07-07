@@ -8,6 +8,8 @@ import {
   GET_USER,
   SIGN_OUT,
   GET_PROJECT_BY_ID,
+  FORUM_CATEGORIES,
+  TOPICS_BY_CATEGORY,
 } from '../queries';
 
 import { useQuery, useMutation, useLazyQuery } from '@apollo/react-hooks';
@@ -54,3 +56,9 @@ export const useSignOut = () => useMutation(SIGN_OUT);
 export const useLazyGetUser = () => useLazyQuery(GET_USER);
 export const useGetUser = () => useQuery(GET_USER);
 // Auth actions end ------***-------
+
+// Forum Actions start  ----
+export const useGetForumCategories = () => useQuery(FORUM_CATEGORIES);
+export const useGetTopicsByCategory = options =>
+  useQuery(TOPICS_BY_CATEGORY, options);
+// Forum Actions end  ----
