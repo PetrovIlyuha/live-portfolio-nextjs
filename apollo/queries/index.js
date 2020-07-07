@@ -180,3 +180,35 @@ export const GET_USER = gql`
     }
   }
 `;
+
+// Forum QUERIES START ------------
+export const FORUM_CATEGORIES = gql`
+  query ForumCategories {
+    forumCategories {
+      slug
+      title
+      subTitle
+    }
+  }
+`;
+
+export const TOPICS_BY_CATEGORY = gql`
+  query TopicsByCategoty($category: String) {
+    topicsByCategory(category: $category) {
+      _id
+      slug
+      title
+      content
+      user {
+        username
+        avatar
+      }
+      forumCategory {
+        _id
+        title
+        slug
+      }
+    }
+  }
+`;
+// Forum QUERIES END -----------
