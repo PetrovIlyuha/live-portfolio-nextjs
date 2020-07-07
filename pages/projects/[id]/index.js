@@ -14,7 +14,7 @@ const ProjectsDetail = ({ query }) => {
   const project = (data && data.project) || {};
   if (loading) return <Spinner animation="grow" variant="danger" size="lg" />;
   return (
-    <BaseLayout footer="relative">
+    <BaseLayout>
       <div className="portfolio-detail">
         <div className="container mt-5">
           <div className="jumbotron bg-gradient-primary">

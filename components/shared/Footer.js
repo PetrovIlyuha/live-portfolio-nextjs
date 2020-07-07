@@ -1,14 +1,17 @@
-import React from "react";
+import React from 'react';
 
 const Footer = ({ footer }) => {
-  const classPositionFooter =
-    footer === "absolute"
-      ? "sticky-absolute"
-      : footer === "relative"
-      ? "sticky-relative"
-      : "";
   return (
-    <footer className={`py-4 bg-black py-3 ${classPositionFooter}`}>
+    <footer
+      style={{
+        position: 'fixed',
+        padding: '20px 0',
+        bottom: 0,
+        background: 'linear-gradient(to right, #24243e, #302b63, #0f0c29)',
+        width: '100vw',
+        color: 'white',
+      }}
+    >
       <small>Copyright &copy; {new Date().getFullYear()} Live Portfolio</small>
     </footer>
   );
