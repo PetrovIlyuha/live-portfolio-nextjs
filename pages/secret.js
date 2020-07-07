@@ -4,7 +4,7 @@ import BaseLayout from '@/layouts/BaseLayout';
 
 const Secret = withAuth(() => {
   return (
-    <BaseLayout footer="absolute">
+    <BaseLayout>
       <div className="container" style={{ marginTop: '45vh' }}>
         <section className="section-title">
           <div className="px-2">

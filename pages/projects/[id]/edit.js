@@ -29,7 +29,7 @@ const EditProject = () => {
     });
   };
   return (
-    <BaseLayout footer="relative">
+    <BaseLayout>
       <div className="container">
         <section className="section-title">
           <div className="px-2">

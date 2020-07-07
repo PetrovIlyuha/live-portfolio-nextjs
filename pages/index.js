@@ -18,7 +18,7 @@ const Home = () => {
   }, []);
 
   return (
-    <BaseLayout page="Home" footer="relative">
+    <BaseLayout page="Home">
       {/* HOME PAGE STARTS */}
       <div className="container">
         <a href="" className="btn btn-main bg-blue ttu">
