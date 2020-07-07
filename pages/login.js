@@ -34,7 +34,7 @@ const Login = () => {
     }
   };
   return (
-    <BaseLayout footer="absolute">
+    <BaseLayout>
       <div className="container">
         <section className="section-title">
           <div className="px-2">
