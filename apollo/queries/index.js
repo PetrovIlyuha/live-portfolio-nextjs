@@ -192,23 +192,49 @@ export const FORUM_CATEGORIES = gql`
   }
 `;
 
+const topicResponseFields = `
+  _id
+  slug
+  title
+  content
+  user {
+    username
+    avatar
+  }
+  forumCategory {
+    _id
+    title
+    slug
+  }
+`;
+
 export const TOPICS_BY_CATEGORY = gql`
   query TopicsByCategoty($category: String) {
     topicsByCategory(category: $category) {
-      _id
-      slug
-      title
-      content
-      user {
-        username
-        avatar
-      }
-      forumCategory {
-        _id
-        title
-        slug
-      }
+      ${topicResponseFields}
     }
   }
 `;
+
+export const CREATE_TOPIC = gql`
+  mutation CreateTopic(
+    $title: String
+    $content: String
+    $forumCategory: String
+  ) {
+    createTopic(
+      input: { title: $title, content: $content, forumCategory: $forumCategory }
+    ) {
+      ${topicResponseFields}
+    }
+  }
+`;
+export const TOPIC_BY_SLUG = gql`
+  query TopicBySlug($slug: String) {
+    topicBySlug(slug: $slug) {
+     ${topicResponseFields}
+    }
+  }
+`;
+
 // Forum QUERIES END -----------
