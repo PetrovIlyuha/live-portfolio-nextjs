@@ -7,6 +7,7 @@ import { useLazyGetUser } from '../../apollo/actions';
 
 const AppNavbar = () => {
   const [user, setUser] = useState(null);
+  const [username, setUsername] = useState('');
   const [hasResponse, setHasResponse] = useState(false);
   const [getUser, { data, error }] = useLazyGetUser();
 
@@ -16,12 +17,16 @@ const AppNavbar = () => {
   if (data) {
     if (data.user && !user) {
       setUser(data.user);
+      const userName =
+        data.user.username[0].toUpperCase() + data.user.username.slice(1);
+      setUsername(userName);
     }
     if (!data.user && user) {
       setUser(null);
     }
     if (!hasResponse) setHasResponse(true);
   }
+
   const checkPermissions = () =>
     user.role === 'admin' || user.role === 'instructor';
   return (
@@ -36,7 +41,7 @@ const AppNavbar = () => {
             />
           </AppLink>
         </Navbar.Brand>
-        <Navbar.Toggle />
+        <Navbar.Toggle className={styles.navbar__toggle} />
         <Navbar.Collapse>
           <Nav className="mr-auto">
             <AppLink
@@ -62,8 +67,8 @@ const AppNavbar = () => {
                 <div className="user_personal_navbar">
                   <div className="user_greeting">
                     <span className="nav-link mr-4">
-                      Weclome{' '}
-                      <span style={{ color: 'yellow' }}>{user.username}</span>
+                      Welcome{' '}
+                      <span style={{ color: 'yellow' }}>{username}</span>
                     </span>
 
                     <img
@@ -73,7 +78,7 @@ const AppNavbar = () => {
                     />
                   </div>
                   <NavDropdown
-                    className="nav-link mr-3"
+                    className="nav-link"
                     title="Manage"
                     id="basic-nav-dropdown"
                   >
