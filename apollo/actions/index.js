@@ -10,6 +10,8 @@ import {
   GET_PROJECT_BY_ID,
   FORUM_CATEGORIES,
   TOPICS_BY_CATEGORY,
+  CREATE_TOPIC,
+  TOPIC_BY_SLUG,
 } from '../queries';
 
 import { useQuery, useMutation, useLazyQuery } from '@apollo/react-hooks';
@@ -61,4 +63,7 @@ export const useGetUser = () => useQuery(GET_USER);
 export const useGetForumCategories = () => useQuery(FORUM_CATEGORIES);
 export const useGetTopicsByCategory = options =>
   useQuery(TOPICS_BY_CATEGORY, options);
+
+export const useCreateTopic = () => useMutation(CREATE_TOPIC);
+export const useGetTopicBySlug = options => useQuery(TOPIC_BY_SLUG, options);
 // Forum Actions end  ----
