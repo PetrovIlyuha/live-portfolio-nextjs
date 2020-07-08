@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Footer = ({ footer }) => {
+const Footer = () => {
   return (
     <footer
       style={{

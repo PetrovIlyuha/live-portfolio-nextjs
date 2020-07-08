@@ -1,12 +1,12 @@
 import Navbar from '@/components/shared/Navbar';
 import Hero from '@/components/shared/Hero';
-import Footer from '@/components/shared/Footer';
+import Footer from '../components/shared/Footer';
 import { ToastContainer } from 'react-toastify';
 import { useRouter } from 'next/router';
 import { toast } from 'react-toastify';
 import { messages } from '../variables/messages';
 
-const BaseLayout = ({ children, page = '', footer = 'absolute' }) => {
+const BaseLayout = ({ children, page = '' }) => {
   const router = useRouter();
   const { message } = router.query;
 
@@ -37,9 +37,9 @@ const BaseLayout = ({ children, page = '', footer = 'absolute' }) => {
       <Navbar />
       {message && displayMessage()}
       {isHomePage() && <Hero />}
-      <div style={{ marginTop: '80px' }}>{children}</div>
+      <div style={{ marginTop: '100px' }}>{children}</div>
       <div className="text-center h4">
-        <Footer footer={footer} />
+        <Footer />
       </div>
       <ToastContainer hideProgressBar={true} newestOnTop={true} />
     </div>
