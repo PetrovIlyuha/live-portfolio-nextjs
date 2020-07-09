@@ -58,10 +58,21 @@ exports.forumQueries = {
     }
     return ctx.models.Topic.getAllByCategory(forumCategory._id);
   },
+  topicBySlug: async (root, { slug }, ctx) => {
+    return ctx.models.Topic.getBySlug(slug);
+  },
+  postsByTopic: async (root, { slug }, ctx) => {
+    const topic = await ctx.models.Topic.getBySlug(slug);
+    return ctx.models.Post.getAllByTopic(topic);
+  },
 };
 
 exports.forumMutations = {
   createTopic: async (root, { input }, ctx) => {
+    const category = await ctx.models.ForumCategory.getBySlug(
+      input.forumCategory
+    );
+    input.forumCategory = category._id;
     const topic = await ctx.models.Topic.create(input);
     return topic;
   },
