@@ -9,6 +9,10 @@ class Topic {
       .populate('user')
       .populate('forumCategory');
   }
+
+  getBySlug(slug) {
+    return this.Model.findOne({ slug }).populate('user').populate('category');
+  }
   async _create(topicData) {
     const createdTopic = await this.Model.create(topicData);
     return this.Model.findById(createdTopic._id)
