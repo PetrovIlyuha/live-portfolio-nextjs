@@ -380,18 +380,26 @@ html {
 }
 
 .fj-post-list {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   .topic-parent {
     &-content {
       padding-top: 10px;
+      margin-left: 10px;
+      color: rgb(250, 224, 224) !important;
     }
 
     &-inner {
-      background-color: rgba(0, 0, 0, 0.1);
-      border: solid 1px rgba(255, 255, 255, 0.15);
-      padding: 15px;
-      // color: rgba(255,255,255,1);
-      color: black;
-      font-size: 22px;
+      background: linear-gradient(to right, #a71970, #c03acc);
+      border-radius: 10px;
+      box-shadow: 5px 6px 6px -2px rgba(0, 0, 0, 0.45);
+      padding: 5px;
+      margin-left: 260px;
+      padding-left: 10px;
+      margin-bottom: 30px;
+      width: 40%;
+      font-size: 14px;
     }
 
     &-header {
@@ -402,6 +410,7 @@ html {
 
       .username {
         align-self: center;
+        color: rgb(165, 231, 148) !important;
       }
     }
 
@@ -410,8 +419,8 @@ html {
         width: 46px;
         height: 46px;
         margin: 2px calc(2px + 0.55em) 2px 2px;
-        // border-radius: 50%;
-        border: 1px solid $gray-40;
+        border-radius: 20%;
+        border: 2px solid white;
       }
     }
   }
@@ -420,6 +429,10 @@ html {
     border-left: none;
     border-bottom: solid 1px rgba(0, 0, 0, 0.15);
     border-top: solid 1px rgba(0, 0, 0, 0.15);
+    background: rgba(21, 15, 39, 0.863);
+    color: whitesmoke;
+    margin-bottom: 20px;
+    border-radius: 20px;
 
     .topic-avatar {
       padding-top: 20px;
@@ -438,6 +451,7 @@ html {
           margin: 2px calc(2px + 0.55em) 2px 2px;
           // border-radius: 50%;
           border: 1px solid $gray-40;
+          border-left: 3px solid rgb(6, 6, 41);
         }
       }
     }
@@ -446,7 +460,7 @@ html {
       flex: 1 1;
       padding-top: 20px;
       padding-bottom: 40px;
-      color: black;
+      color: rgb(224, 204, 204) !important;
       border-top: none;
       z-index: auto;
       width: auto;
@@ -470,7 +484,7 @@ html {
             font-weight: bold;
             font-size: 23px;
             display: block;
-            color: $gray-70;
+            color: rgb(79, 250, 64);
           }
         }
 
@@ -480,8 +494,9 @@ html {
           align-items: center;
 
           .date {
-            color: $gray-70;
+            color: yellow;
             font-size: 14px;
+            margin-right: 2rem;
           }
         }
       }
@@ -489,7 +504,7 @@ html {
       .topic-content {
         margin-top: 15px;
         font-size: 22px;
-        color: $gray-70;
+        color: rgb(101, 122, 243);
       }
     }
 
@@ -515,13 +530,32 @@ html {
 
       button {
         text-decoration: underline;
+        margin: 10px 50px 0 0;
+        padding: 4px 10px;
+        background: red !important;
       }
     }
 
     &.topic-post-lead {
       border-bottom: 0;
-      background-color: $gray-20;
-      padding: 15px;
+      background: #0f0c29; /* fallback for old browsers */
+      background: -webkit-linear-gradient(
+        to right,
+        #24243e,
+        #302b63,
+        #0f0c29
+      ); /* Chrome 10-25, Safari 5.1-6 */
+      background: linear-gradient(
+        to right,
+        #24243e,
+        #302b63,
+        #0f0c29
+      ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+      border-radius: 14px;
+      box-shadow: 2px 4px 10px -4px rgba(0, 0, 0, 0.3);
+      padding: 45px;
+      margin-bottom: 25px;
     }
   }
 }
@@ -793,6 +827,7 @@ html {
   @media (min-width: 48em) {
     .container {
       max-width: 46rem;
+      margin: 0 8rem;
     }
   }
   .container-narrow > hr {
