@@ -237,4 +237,31 @@ export const TOPIC_BY_SLUG = gql`
   }
 `;
 
+const postsResponse = `
+  _id
+  content
+  slug
+  createdAt
+  user {
+    username
+    avatar
+  }
+  parent {
+    _id
+    content
+    user {
+      username
+      avatar
+    }
+  }
+`;
+
+export const POSTS_BY_TOPIC = gql`
+  query PostsByTopic($slug: String) {
+    postsByTopic(slug: $slug) {
+      ${postsResponse}
+    }
+  }
+`;
+
 // Forum QUERIES END -----------
