@@ -63,7 +63,7 @@ exports.createApolloServer = () => {
         User: new User(mongoose.model('User')),
         ForumCategory: new ForumCategory(mongoose.model('ForumCategory')),
         Topic: new Topic(mongoose.model('Topic'), req.user),
-        Post: new Post(mongoose.model('Post', req.user)),
+        Post: new Post(mongoose.model('Post'), req.user),
       },
     }),
   });
