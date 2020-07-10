@@ -12,6 +12,7 @@ import {
   TOPICS_BY_CATEGORY,
   CREATE_TOPIC,
   TOPIC_BY_SLUG,
+  POSTS_BY_TOPIC,
 } from '../queries';
 
 import { useQuery, useMutation, useLazyQuery } from '@apollo/react-hooks';
@@ -64,6 +65,8 @@ export const useGetForumCategories = () => useQuery(FORUM_CATEGORIES);
 export const useGetTopicsByCategory = options =>
   useQuery(TOPICS_BY_CATEGORY, options);
 
+export const useGetTopicBySlug = options => useQuery(TOPIC_BY_SLUG, options);
+
 export const useCreateTopic = () =>
   useMutation(CREATE_TOPIC, {
     update(cache, { data: { createTopic } }) {
@@ -83,5 +86,5 @@ export const useCreateTopic = () =>
     },
   });
 
-export const useGetTopicBySlug = options => useQuery(TOPIC_BY_SLUG, options);
+export const useGetPostsByTopic = options => useQuery(POSTS_BY_TOPIC, options);
 // Forum Actions end  ----
