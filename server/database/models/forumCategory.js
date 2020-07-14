@@ -2,8 +2,8 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const forumCategorySchema = new Schema({
-  title: String,
-  subTitle: String,
+  title: { type: String },
+  subTitle: { type: String },
   slug: { type: String, unique: true, index: true },
   createdAt: { type: Date, default: Date.now },
 });
