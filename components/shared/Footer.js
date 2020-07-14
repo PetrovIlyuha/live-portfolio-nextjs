@@ -10,6 +10,7 @@ const Footer = () => {
         background: 'linear-gradient(to right, #24243e, #302b63, #0f0c29)',
         width: '100vw',
         color: 'white',
+        zIndex: 4,
       }}
     >
       <small>Copyright &copy; {new Date().getFullYear()} Live Portfolio</small>
