@@ -60,8 +60,8 @@ const PostItem = ({ post, className = '', onReply, canCreate = false }) => {
                     relations={[
                       {
                         targetId: 'parent',
-                        targetAnchor: 'left',
-                        sourceAnchor: 'top',
+                        targetAnchor: 'bottom',
+                        sourceAnchor: 'right',
                         style: {
                           strokeColor: 'rgba(250,250,250,0.6)',
                           strokeWidth: 3,

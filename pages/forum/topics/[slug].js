@@ -76,7 +76,6 @@ const Posts = ({ topic, posts, user }) => {
               <PostItem
                 post={post}
                 canCreate={user !== null}
-                hasParent={post.parent}
                 key={post._id}
                 onReply={reply => {
                   setReplyTo(reply);
