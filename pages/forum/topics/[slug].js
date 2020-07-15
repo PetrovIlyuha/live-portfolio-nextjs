@@ -1,15 +1,17 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import BaseLayout from '../../../layouts/BaseLayout';
 import {
   useGetTopicBySlug,
   useGetPostsByTopic,
   useGetUser,
+  useCreatePost,
 } from '../../../apollo/actions';
 import withApollo from '@/hoc/withApollo';
 import { useRouter } from 'next/router';
 import { getDataFromTree } from '@apollo/react-ssr';
 import PostItem from '../../../components/forum/PostItem';
 import Replier from '../../../components/shared/Replier';
+import { toast } from 'react-toastify';
 
 const useInitialData = () => {
   const router = useRouter();
@@ -19,6 +21,7 @@ const useInitialData = () => {
   const { data: postsByTopicData } = useGetPostsByTopic({
     variables: { slug },
   });
+
   const topic = (data && data.topicBySlug) || {};
   const posts = (postsByTopicData && postsByTopicData.postsByTopic) || [];
   const user = (userData && userData.user) || null;
@@ -44,8 +47,25 @@ const PostPage = () => {
 };
 
 const Posts = ({ topic, posts, user }) => {
+  const pageEnd = useRef();
   const [isReplierOpen, setReplierOpen] = useState(false);
   const [replyTo, setReplyTo] = useState(null);
+  const [createPost, { error }] = useCreatePost();
+
+  const handleCreatePost = async reply => {
+    if (replyTo) {
+      reply.parent = replyTo._id;
+    }
+    reply.topic = topic._id;
+    await createPost({ variables: reply });
+    setReplierOpen(false);
+    toast.success('Post has been created! 🎉');
+    scrollToBottom();
+  };
+
+  const scrollToBottom = () => {
+    pageEnd.current.scrollIntoView({ behavior: 'smooth' });
+  };
   return (
     <section style={{ marginBottom: '100px' }}>
       <div className="fj-post-list">
@@ -56,6 +76,7 @@ const Posts = ({ topic, posts, user }) => {
               <PostItem
                 post={post}
                 canCreate={user !== null}
+                hasParent={post.parent}
                 key={post._id}
                 onReply={reply => {
                   setReplyTo(reply);
@@ -85,8 +106,9 @@ const Posts = ({ topic, posts, user }) => {
           </div>
         </div>
       </div>
+      <div ref={pageEnd}></div>
       <Replier
-        onSubmit={() => {}}
+        onSubmit={handleCreatePost}
         hasTitle={false}
         replyTo={(replyTo && replyTo.user.username) || topic.title}
         isOpen={isReplierOpen}
