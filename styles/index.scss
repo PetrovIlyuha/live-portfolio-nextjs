@@ -109,8 +109,7 @@ html {
 }
 
 .cooked {
-  padding: 0 11px 0.25em 11px;
-  line-height: 1.6;
+  line-height: 1;
 }
 
 // Modifiers END
@@ -392,10 +391,10 @@ html {
 
     &-inner {
       background: linear-gradient(to right, #a71970, #c03acc);
+      padding: 20px;
       border-radius: 10px;
       box-shadow: 5px 6px 6px -2px rgba(0, 0, 0, 0.45);
-      padding: 5px;
-      margin-left: 260px;
+      margin-left: 220px;
       padding-left: 10px;
       margin-bottom: 30px;
       width: 40%;
@@ -449,8 +448,8 @@ html {
           width: 76px;
           height: 76px;
           margin: 2px calc(2px + 0.55em) 2px 2px;
-          // border-radius: 50%;
-          border: 1px solid $gray-40;
+          border-radius: 50%;
+          border: 3px solid $gray-40;
           border-left: 3px solid rgb(6, 6, 41);
         }
       }
@@ -458,8 +457,8 @@ html {
 
     .topic-body {
       flex: 1 1;
-      padding-top: 20px;
-      padding-bottom: 40px;
+      padding-top: 10px;
+      padding-bottom: 10px;
       color: rgb(224, 204, 204) !important;
       border-top: none;
       z-index: auto;
@@ -467,6 +466,7 @@ html {
       min-width: 0;
       max-width: 100%;
       word-break: break-word;
+      font-family: 'Cabin', sans-serif;
 
       .topic-header {
         padding: 0 11px 0.25em 11px;
@@ -503,6 +503,7 @@ html {
 
       .topic-content {
         margin-top: 15px;
+        margin-left: -50px;
         font-size: 22px;
         color: rgb(101, 122, 243);
       }
@@ -530,9 +531,11 @@ html {
 
       button {
         text-decoration: underline;
-        margin: 10px 50px 0 0;
-        padding: 4px 10px;
-        background: red !important;
+        margin: 10px 50px 10px 0;
+        padding: 8px 14px;
+        border-radius: 9px;
+        font-weight: 400;
+        font-family: 'Cabin', sans-serif;
       }
     }
 
