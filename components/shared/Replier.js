@@ -52,7 +52,8 @@ const Replier = ({ isOpen, onClose, onSubmit, replyTo, hasTitle = true }) => {
           <div className="send mr-auto">
             <button
               onClick={() => {
-                onSubmit(reply, resetFormFields);
+                onSubmit(reply);
+                resetFormFields();
               }}
               className="btn btn-primary py-2 ttu"
             >
