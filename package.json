@@ -42,6 +42,7 @@
     "passport-strategy": "^1.0.0",
     "react-bootstrap": "^1.0.0-beta.16",
     "react-hook-form": "^5.7.2",
+    "react-js-pagination": "^3.0.3",
     "uninstall": "0.0.0"
   }
 }
