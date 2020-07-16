@@ -85,6 +85,11 @@ exports.forumTypes = `
     parent: Post
     createdAt: String
   }
+
+  type PaginatedPosts {
+    posts: [Post]
+    count: Int
+  }
   input PostInput {
     content: String
     parent: String
