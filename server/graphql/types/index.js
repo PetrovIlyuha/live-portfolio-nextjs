@@ -95,4 +95,9 @@ exports.forumTypes = `
     parent: String
     topic: String
   }
+
+  type HighlightResponse {
+    projects: [Project]
+    topics: [Topic]
+  }
 `;
