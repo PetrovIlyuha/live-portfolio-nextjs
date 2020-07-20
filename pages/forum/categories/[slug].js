@@ -31,10 +31,9 @@ const Topics = () => {
   const [isReplierOpen, setReplierOpen] = useState(false);
   const { topicsByCategory, user, slug, router } = useInitialData();
   const [createTopic] = useCreateTopic();
-  const handleTopicCreationForm = (topicData, reset) => {
+  const handleTopicCreationForm = topicData => {
     topicData.forumCategory = slug;
     createTopic({ variables: topicData }).then(() => {
-      reset();
       setReplierOpen(false);
     });
   };
