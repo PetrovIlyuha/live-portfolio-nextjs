@@ -1,6 +1,6 @@
 import BaseLayout from '../layouts/BaseLayout';
 import { useRouter } from 'next/router';
-import { toast } from 'react-toastify';
+import { toast, ToastContainer } from 'react-toastify';
 import { messages } from '../variables/messages';
 import { useEffect } from 'react';
 
@@ -99,6 +99,7 @@ const Home = () => {
           See More Posts
         </a>
       </div>
+      <ToastContainer />
     </BaseLayout>
   );
 };
