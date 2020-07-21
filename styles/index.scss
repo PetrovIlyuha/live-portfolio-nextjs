@@ -164,9 +164,10 @@ html {
   align-items: center;
 
   .avatar-image {
-    width: 28px;
-    height: 28px;
+    width: 33px;
+    height: 33px;
     border-radius: 50%;
+    border: 1px solid black;
   }
 
   .avatar-title {
@@ -229,7 +230,8 @@ html {
 }
 
 .portfolio-app {
-  min-height: 100%;
+  min-height: 100vh;
+  background: rgb(199, 180, 180);
 }
 
 .page-wrapper {
@@ -243,7 +245,7 @@ html {
   justify-content: center;
   margin-top: 100px;
   width: 100%;
-  min-height: 50vh;
+  min-height: 40vh;
   background: url('../public/hero-image.jpg') no-repeat;
   background-position: center;
   background-size: cover;
@@ -1056,3 +1058,49 @@ html {
   margin: 0 100px;
 }
 // Categories Section Styles Ends
+
+// Topic highligths
+
+.highlights_section {
+  margin-top: -50px;
+  background: rgb(199, 180, 180);
+  padding-bottom: 200px;
+}
+.project_highlight {
+  border-radius: 20px;
+  box-shadow: 5px 12px 20px 0 rgba(0, 0, 0, 0.25),
+    -8px -8px 12px 0 rgba(255, 255, 255, 0.3);
+}
+
+.topic_highlight {
+  border-radius: 4px;
+  box-shadow: 2px 6px 12px 0 rgba(0, 0, 0, 0.25),
+    -10px -6px 20px -2px rgba(255, 255, 255, 0.4);
+}
+
+.list-group-item {
+  background: rgb(199, 180, 180) !important;
+  box-shadow: 12px 12px 16px 0 rgba(255, 255, 255, 0.3) inset,
+    -8px -8px 12px 0 rgba(0, 0, 0, 0.25) inset;
+  width: 100%;
+}
+
+.stylish_btn {
+  padding: 20px;
+  border-radius: 10px;
+  border: 1px solid black;
+  color: black;
+  text-decoration: none;
+  text-underline-position: unset;
+  box-shadow: 2px 6px 12px 0 rgba(0, 0, 0, 0.25),
+    -10px -6px 20px -2px rgba(255, 255, 255, 0.4);
+}
+
+.stylish_btn:hover {
+  color: rgb(184, 238, 122);
+  background: rgb(102, 89, 89);
+  border: 1px solid white;
+  box-shadow: 2px 6px 12px 0 rgba(0, 0, 0, 0.25),
+    -10px -6px 20px -2px rgba(255, 255, 255, 0.4);
+  width: 100%;
+}
