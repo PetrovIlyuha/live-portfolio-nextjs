@@ -1,6 +1,8 @@
-class User {
-  constructor(model) {
-    this.Model = model;
+const BaseModel = require('./BaseModel');
+
+class User extends BaseModel {
+  constructor(model, user) {
+    super(model);
   }
 
   getAuthUser(ctx) {
@@ -14,7 +16,7 @@ class User {
     if (signUpData.password !== signUpData.passwordConfirmation) {
       throw new Error("Passwords don't match");
     } else if (!signUpData.username.trim()) {
-      throw new Error("You may want to enjoy using Username");
+      throw new Error('You may want to enjoy using Username');
     } else if (!signUpData.email.trim()) {
       throw new Error("Don't forget to provide your e-mail");
     }
