@@ -1,9 +1,9 @@
 const moment = require('moment');
+const BaseModel = require('./BaseModel');
 
-class Post {
+class Post extends BaseModel {
   constructor(model, user) {
-    this.Model = model;
-    this.user = user;
+    super(model, user);
   }
   async getAllByTopic({ topic, pageNum = 1, pageSize = 5 }) {
     const skips = pageSize * (pageNum - 1);

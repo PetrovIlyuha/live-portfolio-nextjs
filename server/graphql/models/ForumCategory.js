@@ -1,5 +1,8 @@
-class ForumCategory {
-  constructor(model) {
+const BaseModel = require('./BaseModel');
+
+class ForumCategory extends BaseModel {
+  constructor(model, user) {
+    super(model, user);
     this.Model = model;
   }
   getAll() {

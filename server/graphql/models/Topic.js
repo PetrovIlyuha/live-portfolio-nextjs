@@ -1,8 +1,14 @@
 const slugify = require('slugify');
-class Topic {
+const BaseModel = require('./BaseModel');
+
+class Topic extends BaseModel {
   constructor(model, user) {
-    this.Model = model;
-    this.user = user;
+    super(model, user);
+  }
+
+  async getRandoms(limit) {
+    const query = await super.getRandoms(limit);
+    return query().populate('user');
   }
   getAllByCategory(forumCategory) {
     return this.Model.find({ forumCategory })
