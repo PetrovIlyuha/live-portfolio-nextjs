@@ -1,19 +1,20 @@
 import {
-  GET_PROJECTS,
-  UPDATE_PROJECT,
-  CREATE_PROJECT,
-  DELETE_PROJECT,
-  GET_USER_PROJECTS,
-  SIGN_IN,
-  GET_USER,
-  SIGN_OUT,
-  GET_PROJECT_BY_ID,
-  FORUM_CATEGORIES,
-  TOPICS_BY_CATEGORY,
-  CREATE_TOPIC,
-  TOPIC_BY_SLUG,
-  POSTS_BY_TOPIC,
   CREATE_POST,
+  CREATE_TOPIC,
+  CREATE_PROJECT,
+  GET_HIGHLIGHTS,
+  GET_PROJECTS,
+  DELETE_PROJECT,
+  FORUM_CATEGORIES,
+  GET_USER,
+  GET_USER_PROJECTS,
+  GET_PROJECT_BY_ID,
+  POSTS_BY_TOPIC,
+  SIGN_IN,
+  SIGN_OUT,
+  TOPICS_BY_CATEGORY,
+  TOPIC_BY_SLUG,
+  UPDATE_PROJECT,
 } from '../queries';
 
 import { useQuery, useMutation, useLazyQuery } from '@apollo/react-hooks';
@@ -101,3 +102,7 @@ export const useCreatePost = () =>
     },
   });
 // Forum Actions end  ----
+// Highlights Actions Starts ----
+export const useGetHighlights = options => useQuery(GET_HIGHLIGHTS, options);
+
+// Highlights Actions Ends ----
