@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 const { ApolloServer, gql } = require('apollo-server-express');
 
 const {
+  mixedQueries,
   projectQueries,
   projectMutations,
   userMutations,
@@ -33,6 +34,8 @@ exports.createApolloServer = () => {
       topicsByCategory(category: String): [Topic]
       topicBySlug(slug: String): Topic
       postsByTopic(slug: String, pageNum: Int, pageSize: Int): PaginatedPosts
+
+      highlight(limit: Int): HighlightResponse
     }
 
     type Mutation {
@@ -52,7 +55,12 @@ exports.createApolloServer = () => {
 
   // resolvers
   const resolvers = {
-    Query: { ...projectQueries, ...userQueries, ...forumQueries },
+    Query: {
+      ...mixedQueries,
+      ...projectQueries,
+      ...userQueries,
+      ...forumQueries,
+    },
     Mutation: { ...projectMutations, ...userMutations, ...forumMutations },
   };
   const apolloServer = new ApolloServer({
