@@ -5,8 +5,8 @@ import {
   useGetUser,
   useCreateTopic,
 } from '@/apollo/actions/index';
-import withApollo from '@/hoc/withApollo';
 import { useRouter } from 'next/router';
+import withApollo from '@/hoc/withApollo';
 import { getDataFromTree } from '@apollo/react-ssr';
 import Replier from '../../../components/shared/Replier';
 
