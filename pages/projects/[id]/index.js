@@ -1,5 +1,3 @@
-import { useQuery } from '@apollo/react-hooks';
-import { GET_PROJECT_BY_ID } from '@/apollo/queries';
 import withApollo from '@/hoc/withApollo';
 import { getDataFromTree } from '@apollo/react-ssr';
 import { Spinner } from 'react-bootstrap';
