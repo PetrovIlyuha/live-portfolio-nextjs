@@ -9,7 +9,7 @@
     "seed": "node server/fakeDB/populate.js"
   },
   "dependencies": {
-    "next": "9.3.5",
+    "next": "11.1.0",
     "next-images": "^1.4.0",
     "node-fetch": "^2.6.0",
     "nodemon": "^2.0.4",
